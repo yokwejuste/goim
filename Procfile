@@ -1,1 +1,1 @@
-web: gunicorn records.wsgi
+web: gunicorn goim.wsgi
