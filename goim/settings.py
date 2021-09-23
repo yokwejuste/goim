@@ -15,7 +15,7 @@ BASE_DIR = os.path.dirname(PROJECT_ROOT)
 SECRET_KEY = 'django-insecure-@eer0w_b%@p3nksx&)mq5-u^vrqxloeybj4m63hhzjik02smbo'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'go-immigration.herokuapp.com',
