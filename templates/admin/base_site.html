@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+{% comment %} {% load i18n  eatn_tags static %} {% endcomment %}
+
+{% load i18n %}
+
+{% load static %}
+
+
+{% block title %}{{ title }} | {% trans "go Immigration" %}{% endblock %}
+
+{% block extrastyle %}
+
+    <link rel="stylesheet" type="text/css" href="{% static "admin/admin.css" %}"/>
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+
+{% endblock %}
+
+
+
+{% block branding %}
+
+    <a href="/admin"> <span><img width="150px" height="150px" style=" float: left;"
+                                 src="{% static 'img/logo.png' %}" alt=""></span>
+        {#        <h1 id="site-name"><b>{% trans "Go Immigration" %}#}
+        {#        </b></h1>#}
+    </a>
+
+{% endblock %}
+
+
+{% block nav-global %}{% endblock %}

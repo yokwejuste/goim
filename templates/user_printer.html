@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+    <title>Table - Go Immigration</title>
+    <style>
+        @page {
+            size: letter portrait;
+            margin: 2cm;
+            font-size: 12px;
+
+        }
+
+        table {
+            border: 2px solid black;
+            border-collapse: collapse;
+            justify-items: center;
+        }
+
+        th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            justify-items: center;
+        }
+
+        th, td {
+            height: 55px;
+            text-align: center;
+            justify-content: center;
+            align-content: center;
+        }
+
+        .row {
+            background-color: rgba(150, 212, 212, 0.4);
+        }
+
+        .even {
+            background-color: rgb(172, 176, 150);
+        }
+    </style>
+</head>
+<body>
+<center>
+<span>
+    <img width="100px" height="120px"
+         src="https://scontent-mia3-1.xx.fbcdn.net/v/t1.6435-9/106171269_3097888733625494_7183520107502926797_n.png?_nc_cat=106&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=hl0pZUSlxKYAX9ICfPZ&_nc_ht=scontent-mia3-1.xx&oh=ee151f3644f40a3be886f05abe4c1850&oe=616E703E"
+         alt="none"></span>
+    <h1 style="float: right; font-size: 25px">Customers Information &nbsp;
+    </h1></center>
+
+<table style="border: 2px solid black" class="table my-0" id="dataTable">
+    <thead>
+    <tr>
+        <th style="width: 25px;" class="row">S/N</th>
+        <th>Name</th>
+        <th class="row">Type</th>
+        <th>Destination</th>
+        <th class="row">Age</th>
+        <th>Time of Submission</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if detail %}
+        {% for item in detail %}
+            <tr style="width: 25px;">
+                <td>
+                    {{ item.id }}
+                </td>
+                <td class="even">
+                    <img alt="" style="border-radius: 50px; float: left"
+                         width="50px" height="50px"
+                         src="{{ item.photo.path }}">
+                    <p style="float: right">{{ item.name }}</p>
+                </td>
+                <td>{{ item.type }}</td>
+                <td class="even">{{ item.destination }}</td>
+                <td>{{ item.age }}</td>
+                <td class="even">{{ item.time_of_submission }}<br></td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <p>No items available</p>
+    {% endif %}
+    </tbody>
+</table>
+<br>
+<footer>Copyright &copy Go Immigration 2021</footer>
+</body>
+
+</html>

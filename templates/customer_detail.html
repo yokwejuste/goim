@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ customer.name }} </title>
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome5-overrides.min.css' %}">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/new.css' %}">
+
+</head>
+
+<body style="background: url({% static 'img/background.jpg' %}) "
+      class="font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover">
+<aside class="profile-card">
+
+    <header>
+
+        <!-- here’s the avatar -->
+        <a class="dol" href="{{ customer.photo.url }}">
+            <img src="{{ customer.photo.url }}" alt=""/>
+        </a>
+
+        <!-- the username -->
+        <h3 class="text-blue-700">{{ customer.name }}</h3>
+
+        <!-- and role or location -->
+        <h4><i class="fas fa-briefcase"></i>
+            &nbsp;
+            {{ customer.type }}</h4>
+        <p><i class="fas fa-user-clock"></i>
+            &nbsp;{{ customer.age }}&nbsp;years old</p>
+        <p>
+            <i class="fas fa-map-marker-alt"></i>
+            &nbsp;{{ customer.destination }}
+        </p>
+        <div class="xl:w-48">
+        <span>
+            <a href="{% url 'preview' %}">
+                <button type="button">
+                <i class="fas fa-long-arrow-alt-left"></i>&nbsp;
+                Back
+            </button>
+        </a>
+        </span>
+            <!--<span>
+                <a class="float-right" href="{% url "customer_status" pk=customer.id %}">
+                    <button type="button">
+                <i class="fas fa-info-circle"></i>&nbsp;
+                More Info
+            </button>
+        </a>
+            </span>-->
+        </div>
+    </header>
+    <br>
+    <div class="profile-bio">&nbsp;<p>{{ customer.time_of_submission }}</p>
+    </div>
+
+</aside>
+</body>
+
+</html>

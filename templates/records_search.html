@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Table - Go Immigration</title>
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/fontawesome5-overrides.min.css' %}">
+</head>
+
+<body id="page-top">
+<div id="wrapper">
+    <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+            <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                <div class="container-fluid">
+                    <button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i
+                            class="fas fa-bars"></i></button>
+                    {% if search %}
+                        <a class="btn btn-primary py-0" href="{% url 'preview' %}"><i class="fas fa-search"></i>
+                            &nbsp;Make a search
+                        </a>
+                    {% else %}
+                        <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search"
+                              method="POST">
+                            {% csrf_token %}
+                            <div class="input-group"><label>
+                                <input class="bg-light form-control border-0 small" name="search" type="text"
+                                       placeholder="Search for ...">
+                            </label>
+                                <button class="btn btn-primary py-0" type="submit"><i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    {% endif %}
+                </div>
+            </nav>
+            <div class="container-fluid">
+                <h3 class="text-dark mb-4">Customers</h3>
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        {% if search %}
+                            <p class="text-primary m-0 fw-bold">Customer's Information &nbsp;
+                            <p class="alert alert-success">You searched for
+                                " <span class="text-red-600">{{ search }}</span> "
+                                and got <b class="text-red-600">{{ results.count }}</b>
+                                results.</p>
+                        {% elif search is none %}
+                        {% endif %}
+                        <a class="float-right"
+                           href="{% url 'pdf_download' %}">
+                            <button type="button"
+                                    class="bg-gradient-to-r
+                 from-green-400 to-blue-500
+                 hover:from-pink-500
+                  hover:to-yellow-500
+                  md:from-blue-500
+                  md:hover:from-blue-700 px-4 rounded text-black">
+                                <i class="fas fa-download"></i>&nbsp; Download Report PDF
+                            </button>&nbsp;&nbsp;
+                        </a> &nbsp;&nbsp;
+                        <a class="float-right"
+                           href="{% url 'pdf_view' %}">
+                            <button type="button"
+                                    class="bg-gradient-to-r
+                 from-green-400 to-blue-500
+                 hover:from-pink-500
+                  hover:to-yellow-500
+                  md:from-blue-500
+                  md:hover:from-blue-700 px-4 rounded text-black">
+                                <i class="fas fa-download"></i>&nbsp; View Report PDF
+                            </button>&nbsp;&nbsp;
+                        </a> &nbsp;&nbsp;
+                        <a class="float-center" href="{% url 'choices' %}">
+                            &nbsp;&nbsp;
+                            <button type="button"
+                                    class="bg-gradient-to-r bg-gray-700
+                 hover:from-gray-300
+                  hover:to-red-300
+                  md:from-blue-500
+                  md:hover:from-blue-700 px-4 rounded text-black">
+                                <i class="fas fa-plus"></i>&nbsp; Add A Customer
+                            </button>
+                        </a>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive table mt-2" id="dataTable" role="grid"
+                             aria-describedby="dataTable_info">
+                            <table class="table my-0" id="dataTable">
+                                <thead>
+                                <tr>
+                                    <th>PICTURE</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Destination</th>
+                                    <th>Age</th>
+                                    <th>Time of Submission</th>
+                                    <!--<th>Documents</th>
+                                    <th>Next Event</th>
+                                    <th>Progress</th>-->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr></tr>
+                                {% if search is not None %}
+                                    {% for item in results %}
+                                        <tr>
+                                            <td><a class="text-black text-decoration-none"
+                                                   href="{{ item.photo.url }}">
+                                                <img class="rounded-circle me-2"
+                                                     alt=""
+                                                     width="30" height="30"
+                                                     style="object-fit: contain;
+                                                     background-color:#91debb; border:1px solid palegreen;"
+                                                     src="{{ item.photo.url }}"></a>
+                                            </td>
+                                            <td>
+                                                <a class="text-black
+                                                      lg:hover:text-blue-400 text-decoration-none"
+                                                   href="{% url 'customer_detail' pk=item.id %}">
+                                                    {{ item.name }}</a>
+                                            </td>
+                                            <td>{{ item.type }}</td>
+                                            <td>{{ item.destination }}</td>
+                                            <td>{{ item.age }}</td>
+                                            <td>{{ item.time_of_submission }}<br></td>
+                                            <!--<td></td>
+                                            <td></td>
+                                            <td>
+                                                <span>50%</span>
+                                                <div class="col">
+                                                    <div class="progress progress-sm">
+                                                        <div class="progress-bar bg-info"
+                                                             aria-valuenow="50"
+                                                             aria-valuemin="0"
+                                                             aria-valuemax="100"
+                                                             style="width: 50%;"><span
+                                                                class="visually-hidden">50%</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>-->
+                                        </tr>
+                                    {% endfor %}
+                                {% elif search is None %}
+                                    <p class="alert alert-warning"><span
+                                            class="text-capitalize">{{ request.user.username }},</span>
+                                        &nbsp;you did no
+                                        search&nbsp;!</p>
+                                {% endif %}
+                                <tr></tr>
+                                </tbody>
+                                <tfoot>
+                                <tr></tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="bg-white sticky-footer">
+            <div class="container my-auto">
+                <div class="text-center my-auto copyright"><span>Copyright © Go Immigration 2021</span></div>
+            </div>
+        </footer>
+    </div>
+    <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+</div>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/bs-init.js' %}"></script>
+<script src="{% static 'js/theme.js' %}"></script>
+</body>
+
+</html>
