@@ -19,6 +19,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'go-immigration.herokuapp.com',
+    '0.0.0.0',
+    'https://go-immigration.herokuapp.com/',
+
 ]
 
 # Application definition
