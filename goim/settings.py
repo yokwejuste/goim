@@ -18,7 +18,7 @@ SECRET_KEY = 'django-insecure-@eer0w_b%@p3nksx&)mq5-u^vrqxloeybj4m63hhzjik02smbo
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'go-immigration.herokuapp.com/',
+    'go-immigration.herokuapp.com',
 ]
 
 # Application definition
