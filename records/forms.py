@@ -72,8 +72,7 @@ class UserLoginForm(forms.ModelForm):
 class GoCustomerRegistrationForm(forms.ModelForm):
     class Meta:
         model = GoCustomerRegistration
-        fields = ('name', 'email', 'type', 'destination',
-                  'age', 'phone_number', 'photo', 'documents',)
+        fields = '__all__'
         TYPE_CHOICES = (
             ('', 'Select a customer type'),
             ('student', 'STUDENT'),
@@ -131,7 +130,7 @@ class UserProfile(forms.ModelForm):
 class GoCustomerStatusForm(forms.ModelForm):
     class Meta:
         model = GoCustomerStatus
-        fields = ('name', 'value')
+        fields = '__all__'
         VALUE_CHOICES = (
             ('', 'How far has the customer gone?'),
             (1, 'a'),
@@ -148,7 +147,7 @@ class GoCustomerStatusForm(forms.ModelForm):
             (12, 'l'),
         )
         widgets = {
-            'name': forms.TextInput(
+            'name': forms.Select(
                 attrs={'class': 'form-control w - 30 form-control-user ',
                        'placeholder': 'Enter Customer\'s name', },
             ),

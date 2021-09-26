@@ -1,5 +1,6 @@
 import calendar
 from datetime import datetime, date, timedelta
+from random import random
 
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
@@ -31,7 +32,7 @@ def register(request):
         if form.is_valid():
             form.save()
             return redirect('login')
-        context[['register_form']] = form
+        context['register_form'] = form
 
     else:
         form = UserRegistrationForm
@@ -148,9 +149,11 @@ def handler404(request, *args):
 def preview(request):
     detail = GoCustomerRegistration.objects.all()
     next_event = Event.objects.last()
+    hello = GoCustomerStatus.objects.all()
     context = {
         'detail': detail,
         'event': next_event,
+        'hello': hello,
     }
     return render(request, 'customers_preview.html', context)
 
@@ -182,7 +185,7 @@ def send_files(request):
             hey.attach_alternative(html_message, 'text/html')
             hey.send()
             form.save()
-            return redirect('preview')
+            return redirect('customer_status')
         else:
             HttpResponse(f'Invalid data from {request.user.username}')
         context[['document_form']] = form
@@ -202,46 +205,46 @@ def home(request):
 
 def customer_detail(request, pk):
     customer = GoCustomerRegistration.objects.get(id=pk)
+    custom = GoCustomerStatus.objects.get(name_id=pk)
     context = {
         'customer': customer,
+        'custom': custom,
     }
 
     return render(request, 'customer_detail.html', context)
 
 
-# def customer_status_submit(request, pk):
-#     customer = GoCustomerRegistration.objects.get(id=pk)
-#     form = GoCustomerStatusForm
-#     if request.POST:
-#         form = GoCustomerStatusForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.info(request, 'Customer updated successfully')
-#             redirect('preview')
-#     context = {
-#         'customer': customer,
-#         'form': form,
-#     }
-#
-#     return render(request, 'customer_status.html', context)
+def customer_status_change(request, customer_status_id=None):
+    if customer_status_id:
+        instance = get_object_or_404(GoCustomerStatus, pk=customer_status_id)
+    else:
+        instance = GoCustomerStatus()
 
-
-def customer_status(request, pk):
-    client = GoCustomerStatus.objects.get(name=pk)
-    customer = GoCustomerRegistration.objects.get(id=pk)
+    form = GoCustomerStatusForm(request.POST or None, instance=instance)
+    if request.POST and form.is_valid():
+        form.save()
+        return redirect('preview')
     context = {
-        'client': client,
+        'form': form,
+    }
+    return render(request, 'customer_status.html', context)
+
+
+def customer_status(request, customer_status_id=None):
+    customer = GoCustomerStatus.objects.get(pk=customer_status_id)
+    if customer_status_id:
+        instance = get_object_or_404(GoCustomerStatus, pk=customer_status_id)
+    else:
+        instance = GoCustomerStatus()
+
+    form = GoCustomerStatusForm(request.POST or None, instance=instance)
+    if request.POST and form.is_valid():
+        form.save()
+        return redirect('preview')
+    context = {
+        'form': form,
         'customer': customer,
     }
-    if request.POST:
-        form = GoCustomerStatusForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('preview')
-    else:
-        form = GoCustomerStatusForm
-        context['status_form'] = form
-
     return render(request, 'customer_status.html', context)
 
 
@@ -325,10 +328,6 @@ def get_date(req_day):
         year, month = (int(x) for x in req_day.split('-'))
         return date(year, month, day=1)
     return datetime.today()
-
-
-def index(request):
-    return HttpResponse('hello')
 
 
 def prev_month(d):

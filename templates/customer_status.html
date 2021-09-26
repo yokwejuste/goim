@@ -45,7 +45,6 @@
     <div class="container-login100">
         <div class="wrap-login100 p-t-85 p-b-20">
             <form class="login100-form validate-form"
-                  action="{% url "customer_status" pk=client.name.id %}"
                   method="post">
                 {% csrf_token %}
                 <span class="login100-form-avatar">
@@ -53,36 +52,16 @@
                             <img src="{{ customer.photo.url }}" alt="AVATAR">
                         </a>
 					</span>
-
+                    {{ form }}
                 <div class="block">
                     <span class="text-gray-700">Steps</span>
                     <div class="mt-2">
-                        <div class="my-2">
-                            <label class="inline-flex items-center">
-                                {{ status_form.name.label }}
-                            </label>
-                            {{ customer.name }}
-                        </div>
-                        <div class="my-2">
-                            <label class="inline-flex items-center">
-                                {{ status_form.value.label }}
-                            </label>
-                            {{ status_form.value }}
-                        </div>
-                        <div>
-                    <span class="container-login100-form-btn w-50 float-left">
-                        <a href="{% url 'customer_detail' pk=customer.id %}"
-                           class="login100-form-btn bg-blue-500">
-                            Back
-                        </a>
-                    </span>
                             <span class="container-login100-form-btn w-50 float-left">
                         <button class="login100-form-btn" type="submit">
                             Submit Changes
                         </button>
                     </span>
                         </div>
-                    </div>
                 </div>
             </form>
         </div>

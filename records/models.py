@@ -81,15 +81,16 @@ class GoUser(AbstractBaseUser):
 
 class GoCustomerRegistration(models.Model):
     name = models.CharField(max_length=300, verbose_name='Full name')
+    email = models.EmailField(null=False)
     type = models.CharField(max_length=20, verbose_name='Customer Type')
     destination = models.CharField(max_length=30, null=False, verbose_name='Destination')
     time_of_submission = models.DateTimeField(auto_now_add=True, null=False, verbose_name=' Submit Time')
+    phone_number = models.IntegerField(verbose_name='Phone number')
     age = models.IntegerField(verbose_name="Age", null=False)
     photo = models.ImageField(max_length=10000, verbose_name='Customer Picture',
                               null=False, upload_to='customers/profiles/')
     documents = models.FileField(upload_to='%Y/customers/documents/')
-    phone_number = models.IntegerField(verbose_name='Phone number')
-    email = models.EmailField(null=False)
+
 
     class Meta:
         ordering = ["time_of_submission"]

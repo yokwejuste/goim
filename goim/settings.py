@@ -20,6 +20,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'go-in.herokuapp.com',
     '0.0.0.0',
+    '127.0.0.1',
+    '192.168.0.1',
     'https://go-in.herokuapp.com/',
 
 ]

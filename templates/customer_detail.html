@@ -27,7 +27,7 @@
 
         <!-- here’s the avatar -->
         <a class="dol" href="{{ customer.photo.url }}">
-            <img src="{{ customer.photo.url }}" alt=""/>
+            <img width="100px" height="10px" src="{{ customer.photo.url }}" alt=""/>
         </a>
 
         <!-- the username -->
@@ -43,6 +43,10 @@
             <i class="fas fa-map-marker-alt"></i>
             &nbsp;{{ customer.destination }}
         </p>
+        <p>
+            <i class="fas fa-clock"></i>{{ customer.time_of_submission }}
+        </p>
+        <br>
         <div class="xl:w-48">
         <span>
             <a href="{% url 'preview' %}">
@@ -52,19 +56,16 @@
             </button>
         </a>
         </span>
-            <!--<span>
-                <a class="float-right" href="{% url "customer_status" pk=customer.id %}">
+            <span>
+                <a class="float-right" href="{% url "customer" custom.name_id %}">
                     <button type="button">
                 <i class="fas fa-info-circle"></i>&nbsp;
                 More Info
             </button>
         </a>
-            </span>-->
+            </span>
         </div>
     </header>
-    <br>
-    <div class="profile-bio">&nbsp;<p>{{ customer.time_of_submission }}</p>
-    </div>
 
 </aside>
 </body>

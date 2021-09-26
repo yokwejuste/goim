@@ -39,7 +39,11 @@
                            href="#">
                                     <span
                                             class="d-none d-lg-inline me-2 text-gray-600 small">
-                                        Hi {{ request.user.username }}&nbsp;!</span>
+                                        Hi
+                                        <span class="text-success text-capitalize">
+                                            {{ request.user.username }}
+                                        </span>&nbsp;!
+                                    </span>
                             <img alt=""
                                  class="border rounded-circle img-profile"
                                  src="{{ request.user.profile.url }}"></a>
@@ -101,8 +105,8 @@
                                     <th>Age</th>
                                     <th>Time of Submission</th>
                                     <!--<th>Documents</th>
-                                    <th>Next Event</th>
-                                    <th>Progress</th>-->
+                                    <th>Next Event</th>-->
+                                    <th>Progress</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -136,49 +140,52 @@
                                     </div>
                                     {% for item in detail %}
                                         <tr>
-                                            <td><a class="text-black text-decoration-none"
-                                                   href="{{ item.photo.url }}">
-                                                <img class="rounded-circle me-2"
-                                                     style="object-fit: contain;
+                                        <td><a class="text-black text-decoration-none"
+                                               href="{{ item.photo.url }}">
+                                            <img class="rounded-circle me-2"
+                                                 style="object-fit: contain;
                                                      background-color:#91debb; border:1px solid palegreen;"
-                                                     alt=""
-                                                     width="30" height="30"
-                                                     src="{{ item.photo.url }}"></a>
-                                            </td>
-                                            <td>
-                                                <a class="text-black
+                                                 alt=""
+                                                 width="30" height="30"
+                                                 src="{{ item.photo.url }}"></a>
+                                        </td>
+                                        <td>
+                                            <a class="text-black
                                                       lg:hover:text-blue-400 text-decoration-none"
-                                                   href="{% url 'customer_detail' pk=item.id %}">
-                                                    {{ item.name }}</a>
-                                            </td>
-                                            <td class="text-capitalize">{{ item.type }}</td>
-                                            <td>{{ item.destination }}</td>
-                                            <td>{{ item.age }}</td>
-                                            <td>{{ item.time_of_submission }}</td>
-                                            <!--<td></td>
+                                               href="{% url 'customer_detail' pk=item.id %}">
+                                                {{ item.name }}</a>
+                                        </td>
+                                        <td class="text-capitalize">{{ item.type }}</td>
+                                        <td>{{ item.destination }}</td>
+                                        <td>{{ item.age }}</td>
+                                        <td>{{ item.time_of_submission }}</td>
+                                        <!--<td></td>
                                             <td>
                                                 <li class="text-decoration-none list-none">
                                                     {{ event }}
                                                 </li>
-                                            </td>
-                                            <td>
-                                                <span>50%</span>
-                                                <div class="col">
-                                                    <div class="progress progress-sm">
-                                                        <div class="progress-bar progress-bar-striped"
-                                                             aria-valuenow="50"
-                                                             aria-valuemin="0"
-                                                             aria-valuemax="100"
-                                                             style="width: 50%;"><span
-                                                                class="visually-hidden">
-                                                            50%
-                                                        </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </td>-->
-                                        </tr>
+                                        <td>
+                                            {% for h in hello %}
+                                                <span>{{ h.value }}%</span>
+                                                <div class="col">
+                                                <div class="progress progress-sm">
+                                                <div class="progress-bar progress-bar-striped bg-success"
+                                                     aria-valuenow="{{ h.value }}"
+                                                     aria-valuemin="0"
+                                                     aria-valuemax="100"
+
+                                                     style="width: {{ h.value }}%;"><span
+                                                    class="visually-hidden">
+                                            {% endfor %}
+                                            </span>
+                                            </div>
+                                            </div>
+                                            </div>
+                                        </td>
                                     {% endfor %}
+                                </tr>
+
                                 {% else %}
                                     <div class="content-center">
                                         <div class="text-black

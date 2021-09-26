@@ -32,8 +32,10 @@ body:before {
     border-radius: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    -webkit-animation: puff_portrait 0.5s 1.8s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, borderRadius 0.2s 2.3s linear forwards;
-    animation: puff_portrait 0.5s 1.8s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, borderRadius 0.2s 2.3s linear forwards;
+    -webkit-animation: puff_portrait 0.5s 1.8s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards,
+    borderRadius 0.2s 2.3s linear forwards;
+    animation: puff_portrait 0.5s 1.8s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards,
+    borderRadius 0.2s 2.3s linear forwards;
 }
 
 h1, h2 {
@@ -68,10 +70,18 @@ p {
     transform: translate(-50%, -50%);
     -webkit-border-radius: 50%;
     border-radius: 50%;
-    -webkit-box-shadow: var(--webkit-box-shadow) 3px 6px rgba(0, 0, 0, 0.16), var(--webkit-box-shadow) 3px 6px rgba(0, 0, 0, 0.23);
-    box-shadow: var(--webkit-box-shadow) 3px 6px rgba(0, 0, 0, 0.16), var(--webkit-box-shadow) 3px 6px rgba(0, 0, 0, 0.23);
-    -webkit-animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards, moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, materia_landscape 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
-    animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards, moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, materia_landscape 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+    -webkit-box-shadow: var(--webkit-box-shadow) 3px 6px rgba(0, 0, 0, 0.16),
+    var(--webkit-box-shadow) 3px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: var(--webkit-box-shadow) 3px 6px rgba(0, 0, 0, 0.16),
+    var(--webkit-box-shadow) 3px 6px rgba(0, 0, 0, 0.23);
+    -webkit-animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards,
+    moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards,
+    moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+    materia_landscape 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+    animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards,
+    moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards,
+    moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+    materia_landscape 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
 }
 
 .profile-card header {
@@ -102,27 +112,40 @@ p {
 }
 
 .profile-card header .dol > img {
+    height: 200px;
     width: 120px;
     max-width: 100%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
     -webkit-transition: -webkit-box-shadow 0.3s ease;
     transition: box-shadow 0.3s ease;
-    -webkit-box-shadow: var(--webkit-box-shadow) var(--webkit-box-shadow) var(--webkit-box-shadow) 8px rgba(0, 0, 0, 0.06);
-    box-shadow: var(--webkit-box-shadow) var(--webkit-box-shadow) var(--webkit-box-shadow) 8px rgba(0, 0, 0, 0.06);
+    -webkit-box-shadow: var(--webkit-box-shadow)
+    var(--webkit-box-shadow)
+    var(--webkit-box-shadow)
+    8px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--webkit-box-shadow)
+    var(--webkit-box-shadow)
+    var(--webkit-box-shadow)
+    8px rgba(0, 0, 0, 0.06);
 }
 
 .profile-card header .dol:hover > img {
-    -webkit-box-shadow: var(--webkit-box-shadow) var(--webkit-box-shadow) var(--webkit-box-shadow) 12px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: var(--webkit-box-shadow)
+    var(--webkit-box-shadow)
+    var(--webkit-box-shadow)
+    12px rgba(0, 0, 0, 0.1);
 }
 
 .profile-card header .dol:hover > img {
-    box-shadow: var(--webkit-box-shadow) var(--webkit-box-shadow) var(--webkit-box-shadow) 12px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--webkit-box-shadow)
+    var(--webkit-box-shadow)
+    var(--webkit-box-shadow)
+    12px rgba(0, 0, 0, 0.1);
 }
 
 .profile-card .profile-bio {
     width: 175px;
-    height: 180px;
+    height: 220px;
     display: inline-block;
     float: right;
     padding: 50px 20px 30px 20px;
@@ -153,7 +176,9 @@ p {
 
 .profile-social-links li {
     list-style: none;
-    margin: -5px var(--webkit-box-shadow) var(--webkit-box-shadow) var(--webkit-box-shadow);
+    margin: -5px var(--webkit-box-shadow)
+    var(--webkit-box-shadow)
+    var(--webkit-box-shadow);
     padding: var(--webkit-box-shadow);
     float: left;
     width: 33.3%;
@@ -242,8 +267,14 @@ p {
 
 @media screen and (min-height: 480px) {
     .profile-card {
-        -webkit-animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards, moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, materia_portrait 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
-        animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards, moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, materia_portrait 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+        -webkit-animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards,
+        moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards,
+        moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+        materia_portrait 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+        animation: init 0.5s 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards,
+        moveDown 1s 0.8s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards,
+        moveUp 1s 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+        materia_portrait 0.5s 2.7s cubic-bezier(0.86, 0, 0.07, 1) forwards;
     }
 
     .profile-card header {
@@ -277,8 +308,10 @@ p {
 
     body:before {
         width: var(--webkit-box-shadow);
-        -webkit-animation: puff_landscape 0.5s 1.8s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, borderRadius 0.2s 2.3s linear forwards;
-        animation: puff_landscape 0.5s 1.8s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards, borderRadius 0.2s 2.3s linear forwards;
+        -webkit-animation: puff_landscape 0.5s 1.8s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards,
+        borderRadius 0.2s 2.3s linear forwards;
+        animation: puff_landscape 0.5s 1.8s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards,
+        borderRadius 0.2s 2.3s linear forwards;
     }
 }
 
@@ -469,7 +502,7 @@ p {
     }
     100% {
         width: 280px;
-        height: 440px;
+        height: 650px;
         background: #FFFFFF;
         -webkit-border-radius: 4px;
     }
@@ -484,7 +517,7 @@ p {
     }
     100% {
         width: 280px;
-        height: 440px;
+        height: 650px;
         background: #FFFFFF;
         border-radius: 4px;
     }
