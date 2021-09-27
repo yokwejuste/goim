@@ -1,10 +1,14 @@
 from django.conf.urls import url
 from django.conf.urls.static import static
-from django.urls import path
+from django.urls import path, re_path
+from django.views.generic.base import RedirectView
 
 from records.views import *
 
+favicon_view = RedirectView.as_view(url='/static/favicon.ico', permanent=True)
+
 urlpatterns = [
+                  re_path(r'^favicon\.ico$', favicon_view),
                   path('', home, name='home'),
                   path('register/', register, name='register'),
                   path('login/', login_go_user, name='login'),

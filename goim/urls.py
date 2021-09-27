@@ -16,7 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from django.views.generic.base import RedirectView
 from django.views.static import serve
 
 from goim import settings
@@ -30,8 +31,11 @@ def trigger_error(request):
     division_by_zero = 1 / 0
 
 
+favicon_view = RedirectView.as_view(url='/static/img/favicon.ico', permanent=True)
+
 urlpatterns = [
                   path('admin/', admin.site.urls),
+                  re_path(r'^favicon\.ico$', favicon_view),
                   path('sentry-debug/', trigger_error),
                   path('', include('records.urls')),
                   url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),

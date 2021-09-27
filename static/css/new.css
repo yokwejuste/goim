@@ -58,7 +58,7 @@ p {
 .profile-card {
     background: #FFB300;
     width: 56px;
-    height: 56px;
+    height: 400px;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -502,7 +502,7 @@ p {
     }
     100% {
         width: 280px;
-        height: 650px;
+        height: 500px;
         background: #FFFFFF;
         -webkit-border-radius: 4px;
     }
@@ -517,7 +517,7 @@ p {
     }
     100% {
         width: 280px;
-        height: 650px;
+        height: 500px;
         background: #FFFFFF;
         border-radius: 4px;
     }
