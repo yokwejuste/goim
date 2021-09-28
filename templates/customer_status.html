@@ -47,12 +47,16 @@
             <form class="login100-form validate-form"
                   method="post">
                 {% csrf_token %}
-                <span class="login100-form-avatar">
+                {% if customer is None %}
+                {% else %}
+                    <span class="login100-form-avatar">
 						<a href="{{ customer.photo.url }}">
                             <img src="{{ customer.photo.url }}" alt="AVATAR">
                         </a>
 					</span>
-                    {{ form }}
+                {% endif %}
+
+                {{ form }}
                 <div class="block">
                     <span class="text-gray-700">Steps</span>
                     <div class="mt-2">
@@ -61,7 +65,7 @@
                             Submit Changes
                         </button>
                     </span>
-                        </div>
+                    </div>
                 </div>
             </form>
         </div>

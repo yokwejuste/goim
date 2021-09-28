@@ -1,6 +1,5 @@
 import calendar
 from datetime import datetime, date, timedelta
-from random import random
 
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
@@ -26,24 +25,24 @@ username = GoUser.username
 # Registration View of the user
 
 def register(request):
-    context = {}
+    co_1 = {}
     if request.POST:
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('login')
-        context['register_form'] = form
+        co_1['register_form'] = form
 
     else:
         form = UserRegistrationForm
-        context['register_form'] = form
+        co_1['register_form'] = form
 
-    return render(request, 'register.html', context)
+    return render(request, 'register.html', co_1)
 
 
 # Login view for user
 def login_go_user(request):
-    context = {}
+    con_a = {}
     if request.POST:
         form = UserLoginForm(request.POST)
         if form.is_valid():
@@ -59,8 +58,8 @@ def login_go_user(request):
                 return redirect('dashboard')
     else:
         form = UserLoginForm
-        context['login_form'] = form
-    return render(request, 'login.html', context)
+        con_a['login_form'] = form
+    return render(request, 'login.html', con_a)
 
 
 # Logout for user
@@ -71,15 +70,16 @@ def logout_go_user(request):
 
 @login_required
 def choices(request):
-    context = {}
+    cont = {}
     if request.method == "POST":
-        return render(request, "choices.html", context)
+        return render(request, "choices.html", cont)
     else:
         redirect("login")
-    return render(request, 'choices.html', context)
+    return render(request, 'choices.html', cont)
 
 
 def search_result(request):
+    go = GoCustomerRegistration.objects.all()
     if request.method == "POST":
         search = request.POST['search']
         results = \
@@ -90,15 +90,18 @@ def search_result(request):
                       "records_search.html", {
                           'search': search,
                           'results': results,
+                          'cost': go,
                       })
     else:
         return render(request,
                       "records_search.html", {
+                          'cost': go,
                       })
 
 
 @login_required
 def dashboard(request):
+    go = GoCustomerRegistration.objects.all()
     xyz = GoCustomerRegistration.objects.filter(type__contains='student')
     xzy = GoCustomerRegistration.objects.filter(type__contains='tourist')
     yzx = GoCustomerRegistration.objects.filter(type__contains='worker')
@@ -109,11 +112,11 @@ def dashboard(request):
     for i in range(1, 13):
         arr.append(i)
     for months in arr:
-        hello = GoCustomerRegistration.objects.filter(
+        hello_p = GoCustomerRegistration.objects.filter(
             time_of_submission__month=months,
             time_of_submission__year=2021
         ).count()
-        book.append(hello)
+        book.append(hello_p)
     for months in arr:
         hi = GoCustomerRegistration.objects.filter(
             time_of_submission__month=months,
@@ -121,19 +124,23 @@ def dashboard(request):
         ).count()
         book2.append(hi)
     labels = ['students', 'tourist', 'worker']
-    context = {
+    context_p = {
         'labels': labels,
         'data': data,
         'arr': book,
         'arr_next': book2,
+        'cost': go,
     }
-    return render(request, 'dashboard.html', context)
+    return render(request, 'dashboard.html', context_p)
 
 
 @login_required
 def profile(request):
-    context = {}
-    return render(request, 'profile.html', context)
+    go = GoCustomerRegistration.objects.all()
+    con = {
+        'cost': go,
+    }
+    return render(request, 'profile.html', con)
 
 
 @login_required
@@ -145,42 +152,87 @@ def handler404(request, *args):
     return redirect('h404')
 
 
+global hell
+
+
 @login_required
 def preview(request):
+    global half
     detail = GoCustomerRegistration.objects.all()
-    next_event = Event.objects.last()
-    hello = GoCustomerStatus.objects.all()
-    context = {
+    go = GoCustomerRegistration.objects.all()
+    arr = GoCustomerStatus.objects.all()
+    next_event = Event.objects.all()
+    hey_d = ['primary', 'secondary',
+             'success', 'danger', 'warning', 'info', 'dark'
+             ]
+    hey_p = hey_d * 400
+    listing = zip(detail, arr, next_event, hey_p)
+    conf_o = {
+        'list': listing,
         'detail': detail,
         'event': next_event,
-        'hello': hello,
+        # 'hello': half,
+        'cost': go,
     }
-    return render(request, 'customers_preview.html', context)
+    return render(request, 'customers_preview.html', conf_o)
+
+
+@login_required
+def email(request):
+    context1 = {
+    }
+    global context
+    global messages
+    add = GoCustomerRegistration.objects.all()
+    arr = []
+    for a in add:
+        arr.append(a.email)
+    print(arr)
+    if request.POST:
+        subject = request.POST['title']
+        email_1 = request.POST['message']
+        recipient_list = arr
+        from_email = settings.EMAIL_HOST_USER
+        plain_message = strip_tags(email_1)
+        hey = EmailMultiAlternatives(
+            subject, plain_message,
+            from_email, recipient_list,
+        )
+        hey.attach_alternative(email_1, 'text/html')
+        hey.send()
+        h = hey.send()
+        messages = 'Emails sent successfully'
+        context = {
+            'messages': messages,
+            'h': h,
+        }
+        return render(request, 'email.html', context)
+    return render(request, 'email.html', context1)
 
 
 @login_required
 def send_files(request):
-    context = {
+    cong = {
         'username': username,
     }
     if request.POST:
         form = GoCustomerRegistrationForm(request.POST, request.FILES)
         if form.is_valid():
             name = request.POST['name']
-            email = request.POST['email']
+            email_d = request.POST['email']
             subject = 'Welcome to new user.'
-            context = {
+            cong = {
                 'username': username,
                 'name': name,
             }
             from_email = settings.EMAIL_HOST_USER
-            html_message = render_to_string('message.html', context, request)
-            recipient_list = [email]
+            html_message = render_to_string('message.html', cong, request)
+            recipient_list = [email_d]
             plain_message = strip_tags(html_message)
             hey = EmailMultiAlternatives(
                 subject, plain_message,
                 from_email, recipient_list,
-                [email],
+                [email_d],
             )
             hey.attach_alternative(html_message, 'text/html')
             hey.send()
@@ -188,30 +240,30 @@ def send_files(request):
             return redirect('customer_status')
         else:
             HttpResponse(f'Invalid data from {request.user.username}')
-        context[['document_form']] = form
+        cong[['document_form']] = form
 
     else:
         form = GoCustomerRegistrationForm
-        context['document_form'] = form
-    return render(request, 'files.html', context)
+        cong['document_form'] = form
+    return render(request, 'files.html', cong)
 
 
 def home(request):
-    context = {
+    context_c = {
 
     }
-    return render(request, 'index.html', context)
+    return render(request, 'index.html', context_c)
 
 
 def customer_detail(request, pk):
     customer = GoCustomerRegistration.objects.get(id=pk)
     custom = GoCustomerStatus.objects.get(name_id=pk)
-    context = {
+    context_z = {
         'customer': customer,
         'custom': custom,
     }
 
-    return render(request, 'customer_detail.html', context)
+    return render(request, 'customer_detail.html', context_z)
 
 
 def customer_status_change(request, customer_status_id=None):
@@ -222,16 +274,35 @@ def customer_status_change(request, customer_status_id=None):
 
     form = GoCustomerStatusForm(request.POST or None, instance=instance)
     if request.POST and form.is_valid():
+        name = request.POST['name']
+        email_d = GoCustomerRegistration.objects.get(pk=name)
+        print(email_d)
+        subject_d = f'{name} has Changed Status.'
+        cong = {
+            'username': username,
+            'name': name,
+        }
+        from_email = settings.EMAIL_HOST_USER
+        html_message = render_to_string('status_message.html', cong, request)
+        recipient_list = [email_d.email]
+        plain_message = strip_tags(html_message)
+        hey = EmailMultiAlternatives(
+            subject_d, plain_message,
+            from_email, recipient_list,
+            [email_d],
+        )
+        hey.attach_alternative(html_message, 'text/html')
+        hey.send()
         form.save()
-        return redirect('preview')
-    context = {
+        return redirect('event_new')
+    context_k = {
         'form': form,
     }
-    return render(request, 'customer_status.html', context)
+    return render(request, 'customer_status.html', context_k)
 
 
 def customer_status(request, customer_status_id=None):
-    customer = GoCustomerStatus.objects.get(pk=customer_status_id)
+    customer = GoCustomerRegistration.objects.get(pk=customer_status_id)
     if customer_status_id:
         instance = get_object_or_404(GoCustomerStatus, pk=customer_status_id)
     else:
@@ -239,24 +310,38 @@ def customer_status(request, customer_status_id=None):
 
     form = GoCustomerStatusForm(request.POST or None, instance=instance)
     if request.POST and form.is_valid():
+        name_k = GoCustomerRegistration.objects.get(pk=customer_status_id)
+        email_d = GoCustomerRegistration.objects.get(pk=customer_status_id)
+        subject_d = f'{name_k} has Changed Status.'
+        cong = {
+            'username': username,
+            'name': name_k,
+        }
+        from_email = settings.EMAIL_HOST_USER
+        html_message = render_to_string('status_message.html', cong, request)
+        recipient_list = [email_d.email]
+        plain_message = strip_tags(html_message)
+        hey = EmailMultiAlternatives(
+            subject_d, plain_message,
+            from_email, recipient_list,
+            [email_d],
+        )
+        hey.attach_alternative(html_message, 'text/html')
+        hey.send()
         form.save()
         return redirect('preview')
-    context = {
+    context_q = {
         'form': form,
         'customer': customer,
     }
-    return render(request, 'customer_status.html', context)
-
-
-# ////////////////////////////////////////////////////////////////////////////////////////////////////
-# ////////////////////////////////////////////////////////////////////////////////////////////////////
+    return render(request, 'customer_status.html', context_q)
 
 
 def render_pdf_view(request):
     template_path = 'user_printer.html'
     detail = GoCustomerRegistration.objects.all()
     next_event = Event.objects.all()
-    context = {
+    contest = {
         'detail': detail,
         'event': next_event,
     }
@@ -265,7 +350,7 @@ def render_pdf_view(request):
     response['Content-Disposition'] = 'filename="report.pdf"'
     # find the template and render it.
     template = get_template(template_path)
-    html = template.render(context)
+    html = template.render(contest)
 
     # create a pdf
     pisa_status = pisa.CreatePDF(
@@ -279,7 +364,7 @@ def render_pdf_download(request):
     template_path = 'user_printer.html'
     detail = GoCustomerRegistration.objects.all()
     next_event = Event.objects.all()
-    context = {
+    context_se = {
         'detail': detail,
         'event': next_event,
     }
@@ -288,7 +373,7 @@ def render_pdf_download(request):
     response['Content-Disposition'] = f'attachment; filename="{datetime.now()}_report.pdf"'
     # find the template and render it.
     template = get_template(template_path)
-    html = template.render(context)
+    html = template.render(context_se)
 
     # create a pdf
     pisa_status = pisa.CreatePDF(
@@ -298,7 +383,7 @@ def render_pdf_download(request):
     return response
 
 
-# ////////////////////////////////////////////////////////////////////////////////////////////////////
+# /////////////////////////////////////////////////////////////////////////////////
 # /////////////////////////////AGENDA//////////////////////////////////////////////
 
 
@@ -307,7 +392,7 @@ class CalendarView(generic.ListView):
     template_name = 'calendar.html'
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context_di = super().get_context_data(**kwargs)
 
         # use today's date for the calendar
         d = get_date(self.request.GET.get('day', None))
@@ -317,10 +402,10 @@ class CalendarView(generic.ListView):
 
         # Call the formatmonth method, which returns our calendar as a table
         html_cal = cal.formatmonth(withyear=True)
-        context['calendar'] = mark_safe(html_cal)
-        context['prev_month'] = prev_month(d)
-        context['next_month'] = next_month(d)
-        return context
+        context_di['calendar'] = mark_safe(html_cal)
+        context_di['prev_month'] = prev_month(d)
+        context_di['next_month'] = next_month(d)
+        return context_di
 
 
 def get_date(req_day):
@@ -350,9 +435,21 @@ def event(request, event_id=None):
         instance = get_object_or_404(Event, pk=event_id)
     else:
         instance = Event()
-
     form = EventForm(request.POST or None, instance=instance)
     if request.POST and form.is_valid():
+        subject = request.POST['title']
+        email_1 = request.POST['customer']
+        email_2 = request.POST['description']
+        gr_o_to = GoCustomerRegistration.objects.get(pk=email_1).email
+        recipient_list = [gr_o_to]
+        from_email = settings.EMAIL_HOST_USER
+        plain_message = strip_tags(email_2)
+        hey = EmailMultiAlternatives(
+            subject, plain_message,
+            from_email, recipient_list,
+        )
+        hey.attach_alternative(email_2, 'text/html')
+        hey.send()
         form.save()
-        return HttpResponseRedirect(reverse('calendar'))
+        return HttpResponseRedirect(reverse('preview'))
     return render(request, 'event.html', {'form': form})

@@ -63,7 +63,11 @@
                                href="#">
                                     <span
                                             class="d-none d-lg-inline me-2 text-gray-600 small">
-                                        Hi {{ request.user.username }}&nbsp;!</span>
+                                        Hi
+                                        <span class="text-success text-capitalize">
+                                            {{ request.user.username }}
+                                        </span>&nbsp;!
+                                    </span>
                                 <img alt=""
                                      class="border rounded-circle img-profile"
                                      src="{{ request.user.profile.url }}"></a>
@@ -72,9 +76,11 @@
                                     class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a
                                     class="dropdown-item" href="{% url 'choices' %}"><i
                                     class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Home</a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw me-2 text-gray-400">
-                                    </i>&nbsp;Send Emails</a>
+                                {% if cost.count is 0 %}{% else %}
+                                    <a
+                                            class="dropdown-item" href="{% url 'email' %}"><i
+                                            class="fas fa-list fa-sm fa-fw me-2 text-gray-400">
+                                    </i>&nbsp;Send Emails</a>{% endif %}
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{% url 'logout' %}"><i
                                         class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>
@@ -152,42 +158,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="card shadow">
-                            <div class="card-header py-3">
-                                <p class="text-primary m-0 fw-bold">Contact Settings</p>
-                            </div>
-                            <div class="card-body">
-                                <form>
-                                    <div class="mb-3"><label class="form-label"
-                                                             for="address"><strong>Address</strong>
-                                    </label><input
-                                            class="form-control" type="text" id="address"
-                                            disabled
-                                            placeholder="Sunset Blvd, 38"
-                                            name="address"></div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="mb-3"><label class="form-label" for="city">
-                                                <strong>City</strong></label><input
-                                                    disabled
-                                                    class="form-control" type="text" id="city"
-                                                    placeholder="Los Angeles"
-                                                    name="city"></div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="mb-3"><label class="form-label"
-                                                                     for="country">
-                                                <strong>Country</strong>
-                                            </label><input
-                                                    class="form-control" type="text"
-                                                    disabled
-                                                    id="country" placeholder="USA"
-                                                    name="country"></div>
-                                        </div>
-                                    </div>
-                                </form>
                             </div>
                         </div>
                     </div>

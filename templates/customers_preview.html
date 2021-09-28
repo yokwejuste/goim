@@ -14,6 +14,76 @@
     <link rel="stylesheet" href="{% static 'fonts/fontawesome-all.min.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/fontawesome5-overrides.min.css' %}">
+    <style>
+        .modal {
+            z-index: 1;
+            display: none;
+            padding-top: 10px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            align-content: center;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.8)
+        }
+
+        .modal-content {
+            background-color: transparent;
+            margin: auto;
+            display: inline-block;
+            position: absolute;
+            top: 35%;
+            height: 50%;
+            width: 50%;
+            left: 58%;
+            right: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .close {
+            text-decoration: none;
+            float: right;
+            font-size: 40px;
+            font-weight: bold;
+            color: #ff0000
+        }
+
+        .close:hover {
+            color: red;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+
+        .modal-content {
+            -webkit-animation-name: zoom;
+            -webkit-animation-duration: 0.6s;
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+
+
+        @-webkit-keyframes zoom {
+            from {
+                -webkit-transform: scale(0)
+            }
+            to {
+                -webkit-transform: scale(1)
+            }
+        }
+
+        @keyframes zoom {
+            from {
+                transform: scale(0)
+            }
+            to {
+                transform: scale(1)
+            }
+        }
+
+    </style>
 </head>
 
 <body id="page-top">
@@ -52,9 +122,11 @@
                                 class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a
                                 class="dropdown-item" href="{% url 'choices' %}"><i
                                 class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Home</a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-list fa-sm fa-fw me-2 text-gray-400">
-                                </i>&nbsp;Send Emails</a>
+                            {% if cost.count is 0 %}{% else %}
+                                <a
+                                        class="dropdown-item" href="{% url 'email' %}"><i
+                                        class="fas fa-list fa-sm fa-fw me-2 text-gray-400">
+                                </i>&nbsp;Send Emails</a>{% endif %}
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{% url 'logout' %}"><i
                                     class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>
@@ -74,21 +146,31 @@
                                         class="btn btn-info">
                                     <i class="fas fa-download"></i>&nbsp; Download Report PDF
                                 </button>&nbsp;&nbsp;
-                            </a> &nbsp;&nbsp;
-                            <a class="float-right text-decoration-none"
-                               href="{% url 'pdf_view' %}">
+                            </a> &nbsp;&nbsp;<a class="float-right text-decoration-none"
+                                                href="{% url 'calendar' %}">
                                 <button type="button"
-                                        class="btn btn-success">
-                                    <i class="fas fa-eye"></i>&nbsp; View Report PDF
+                                        class="btn btn-warning">
+                                    <i class="fas fa-calendar-week"></i>&nbsp; Calendar
                                 </button>&nbsp;&nbsp;
-                            </a> &nbsp;&nbsp;
-                            <a class="float-center text-decoration-none" href="{% url 'choices' %}">
-                                &nbsp;&nbsp;
-                                <button type="button"
-                                        class="btn btn-primary">
-                                    <i class="fas fa-plus"></i>&nbsp; Add A Customer
-                                </button>
-                            </a>
+                                <a class="float-right text-decoration-none"
+                                   href="{% url 'pdf_view' %}">
+                                    <button type="button"
+                                            class="btn btn-success">
+                                        <i class="fas fa-eye"></i>&nbsp; View Report PDF
+                                    </button>&nbsp;&nbsp;
+                                </a> &nbsp;
+                                <a class="float-center text-decoration-none" href="{% url 'choices' %}">
+                                    <button type="button"
+                                            class="btn btn-primary">
+                                        <i class="fas fa-plus"></i>&nbsp; Add A Customer
+                                    </button>
+                                </a>&nbsp;
+                                <a class="float-center text-decoration-none" href="{% url 'dashboard' %}">
+                                    <button type="button"
+                                            class="btn btn-info">
+                                        <i class="fas fa-user-circle"></i>&nbsp;Dashboard
+                                    </button>
+                                </a>
                         </p>
 
                     </div>
@@ -104,14 +186,14 @@
                                     <th>Destination</th>
                                     <th>Age</th>
                                     <th>Time of Submission</th>
-                                    <!--<th>Documents</th>
-                                    <th>Next Event</th>-->
+                                    <!--<th>Documents</th>-->
+                                    <th>Next Event</th>
                                     <th>Progress</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr></tr>
-                                {% if detail %}
+                                {% if list %}
                                     <div class="content-center">
                                         <div class="text-black
                                         border-0 rounded
@@ -125,7 +207,11 @@
                                             </button>
                                             <span
                                                     class="inline-block text-center">
-                                            There are {{ detail.count }} customers recorded
+                                                There are {% if detail.count == 0 %}
+                                                <b class="text-danger">{{ detail.count }}</b>
+                                            {% else %}
+                                                <b class="text-success">{{ detail.count }}</b>
+                                            {% endif %} customers recorded
                                         </span>
                                         </div>
                                         <script>
@@ -138,50 +224,116 @@
                                             }
                                         </script>
                                     </div>
-                                    {% for item in detail %}
+                                    {% for item1, item2, item3, item4 in list %}
                                         <tr>
-                                        <td><a class="text-black text-decoration-none"
-                                               href="{{ item.photo.url }}">
+                                        <td>
+                                            {#                                            <a class="text-black text-decoration-none"#}
+                                            {#                                               href="{{ item1.photo.url }}">#}
                                             <img class="rounded-circle me-2"
                                                  style="object-fit: contain;
                                                      background-color:#91debb; border:1px solid palegreen;"
+                                                 id="myImg"
+                                                 onclick="onClick(this)"
                                                  alt=""
                                                  width="30" height="30"
-                                                 src="{{ item.photo.url }}"></a>
+                                                 src="{{ item1.photo.url }}">
+                                            {#                                            </a>#}
                                         </td>
                                         <td>
                                             <a class="text-black
                                                       lg:hover:text-blue-400 text-decoration-none"
-                                               href="{% url 'customer_detail' pk=item.id %}">
-                                                {{ item.name }}</a>
+                                               href="{% url 'customer_detail' pk=item1.id %}">
+                                                {{ item1.name }}</a>
                                         </td>
-                                        <td class="text-capitalize">{{ item.type }}</td>
-                                        <td>{{ item.destination }}</td>
-                                        <td>{{ item.age }}</td>
-                                        <td>{{ item.time_of_submission }}</td>
-                                        <!--<td></td>
-                                            <td>
-                                                <li class="text-decoration-none list-none">
-                                                    {{ event }}
-                                                </li>
-                                            </td>-->
+                                        <td class="text-capitalize">{{ item1.type }}</td>
+                                        <td>{{ item1.destination }}</td>
+                                        <td>{{ item1.age }}</td>
+                                        <td>{{ item1.time_of_submission }}</td>
                                         <td>
-                                            {% for h in hello %}
-                                                <span>{{ h.value }}%</span>
-                                                <div class="col">
-                                                <div class="progress progress-sm">
-                                                <div class="progress-bar progress-bar-striped bg-success"
-                                                     aria-valuenow="{{ h.value }}"
-                                                     aria-valuemin="0"
-                                                     aria-valuemax="100"
+                                            <a href="{% url 'event_edit' event_id=item1.id %}" class="text-black
+                                                      lg:hover:text-blue-400 text-decoration-none"><p
+                                                    class="text-decoration-none list-none">
+                                                {{ item3 }}
+                                            </p></a>
+                                        </td>
+                                        <td>
+                                            <span>{{ item2.value }}%</span>
+                                            {% if item2.value == 100 %} <span>🥰</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-{{ item4 }}" role="progressbar"
+                                                         style="width: {{ item2.value }}%"
+                                                         aria-valuenow="{{ item2.value }}" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
 
-                                                     style="width: {{ h.value }}%;"><span
-                                                    class="visually-hidden">
-                                            {% endfor %}
-                                            </span>
-                                            </div>
-                                            </div>
-                                            </div>
+                                                </div>
+                                            {% elif item2.value == 90 %}<span>🤗</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-{{ item4 }}" role="progressbar"
+                                                         style="width: {{ item2.value }}%"
+                                                         aria-valuenow="{{ item2.value }}" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            {% elif item2.value == 80 %}<span>😊</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-{{ item4 }}" role="progressbar"
+                                                         style="width: {{ item2.value }}%"
+                                                         aria-valuenow="{{ item2.value }}" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            {% elif item2.value == 70 %}<span>😃</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-{{ item4 }}" role="progressbar"
+                                                         style="width: {{ item2.value }}%"
+                                                         aria-valuenow="{{ item2.value }}" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            {% elif item2.value == 60 %}<span>🙃</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-{{ item4 }}" role="progressbar"
+                                                         style="width: {{ item2.value }}%"
+                                                         aria-valuenow="{{ item2.value }}" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            {% elif item2.value == 50 %}<span>🙂</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-{{ item4 }}" role="progressbar"
+                                                         style="width: {{ item2.value }}%"
+                                                         aria-valuenow="{{ item2.value }}" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            {% elif item2.value == 40 %}<span>😐</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-{{ item4 }}" role="progressbar"
+                                                         style="width: {{ item2.value }}%"
+                                                         aria-valuenow="{{ item2.value }}" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            {% elif item2.value == 30 %}<span>🙃</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-{{ item4 }}" role="progressbar"
+                                                         style="width: {{ item2.value }}%"
+                                                         aria-valuenow="{{ item2.value }}" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            {% elif item2.value == 20 %}<span>😑</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-{{ item4 }}" role="progressbar"
+                                                         style="width: {{ item2.value }}%"
+                                                         aria-valuenow="{{ item2.value }}" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            {% elif item2.value == 10 %}<span>😒</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-{{ item4 }}" role="progressbar"
+                                                         style="width: {{ item2.value }}%"
+                                                         aria-valuenow="{{ item2.value }}" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            {% elif item2.value == 0 %}
+                                                <div class="text-danger">
+                                                    What happened!?🧐
+                                                </div>
+                                            {% endif %}
                                         </td>
                                     {% endfor %}
                                 </tr>
@@ -242,6 +394,20 @@
         <i class="fas fa-angle-up">
         </i></a>
 </div>
+{% for i in detail %}
+    <div id="modal01" class="modal" onclick="this.style.display='none'">
+        <span class="close">&nbsp;&times;&nbsp;</span>
+        <div class="modal-content">
+            <img id="img01" style="max-width:60%" alt="" src="">
+        </div>
+    </div>
+    <script>
+        function onClick(element) {
+            document.getElementById("img01").src = element.src;
+            document.getElementById("modal01").style.display = "block";
+        }
+    </script>
+{% endfor %}
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/bs-init.js' %}"></script>
 <script src="{% static 'js/theme.js' %}"></script>
