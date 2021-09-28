@@ -2,7 +2,6 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 from django.urls import reverse
-from twilio.rest import Client
 
 User = settings.AUTH_USER_MODEL
 
@@ -91,7 +90,6 @@ class GoCustomerRegistration(models.Model):
     photo = models.ImageField(max_length=10000, verbose_name='Customer Picture',
                               null=False, upload_to='customers/profiles/')
     documents = models.FileField(upload_to='%Y/customers/documents/')
-
 
     class Meta:
         ordering = ["time_of_submission"]

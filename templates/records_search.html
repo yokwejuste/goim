@@ -69,10 +69,14 @@
                                         class="dropdown-item" href="{% url 'choices' %}"><i
                                         class="fas fa-home fa-sm fa-fw me-2 text-gray-400"></i>
                                     &nbsp;Home</a>{% if cost.count is 0 %}{% else %}
-                                    <a
-                                            class="dropdown-item" href="{% url 'email' %}"><i
-                                            class="fas fa-list fa-sm fa-fw me-2 text-gray-400">
-                                    </i>&nbsp;Send Emails</a>{% endif %}
+                                <a
+                                        class="dropdown-item" href="{% url 'email' %}"><i
+                                        class="fas fa-list fa-sm fa-fw me-2 text-gray-400">
+                                </i>&nbsp;Send Emails</a>
+                                <a
+                                        class="dropdown-item" href="{% url 'email' %}"><i
+                                        class="fas fa-list fa-sm fa-fw me-2 text-gray-400">
+                                </i>&nbsp;Emails user</a>{% endif %}
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{% url 'logout' %}"><i
                                             class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>

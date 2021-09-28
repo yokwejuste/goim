@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <title>Send Emails</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'email/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'email/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'email/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'email/vendor/animate/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'email/vendor/css-hamburgers/hamburgers.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'email/vendor/animsition/css/animsition.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'email/vendor/select2/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'email/vendor/daterangepicker/daterangepicker.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'email/css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'email/css/main.css' %}">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+    <script>
+        var timeleft = 10;
+        var downloadTimer = setInterval(function () {
+            if (timeleft <= 0) {
+                clearInterval(downloadTimer);
+            }
+            document.getElementById("progressBar").value = 10 - timeleft;
+            timeleft -= 1;
+        }, 1000);
+    </script>
+</head>
+<body>
+{% if h %}
+    <script>
+        setTimeout(function () {
+            window.location.href = '{% url 'dashboard' %}';
+        }, 10000);
+    </script>
+{% endif %}
+<div class="container-contact100">
+
+    <div class="wrap-contact100">
+        {% if h %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{ request.user.username }}</strong>,&nbsp; you sent the emails
+                successfully and you will be
+                redirected to your dashboard in
+                <progress class="progress-bar bg-warning progress progress-bar-animated w-100" value="0" max="9"
+                          id="progressBar">
+                </progress>
+                <button type="button" class="btn-close close" data-dismiss="alert" data-bs-dismiss="alert"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+        <form class="contact100-form validate-form" method="post">
+            {% csrf_token %}
+            <span class="contact100-form-title">
+				<span class="text-capitalize text-success">{{ request.user.username }}</span> send emails
+				</span>
+            {#            <div class="wrap-input100 validate-input" data-validate="Please enter email title">#}
+            {#                <label>#}
+            {#                    <input class="input100" type="email" name="email" placeholder="Email Address" required>#}
+            {#                </label>#}
+            {#                <span class="focus-input100"></span>#}
+            {#            #}
+            <div class="wrap-input100 validate-input" data-validate="Please enter email title">
+                <label for="email">
+                    <select class="input100 w-100 py-2 rounded" name="email" id="email">
+                        <option value="">Select a customer address</option>
+                        {% for a in add %}
+                            <option value="{{ a.email }}">{{ a.name }}==>{{ a.email }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+            </div>
+            <div class="wrap-input100 validate-input" data-validate="Please enter email title">
+                <label>
+                    <input class="input100" type="text" name="title" placeholder="Email Title" required>
+                </label>
+                <span class="focus-input100"></span>
+            </div>
+
+            <div class="wrap-input100 validate-input" data-validate="Please enter your message">
+                <label>
+                    <textarea name="message" placeholder="Enter Email" required></textarea>
+                </label>
+                <span class="focus-input100"></span>
+            </div>
+
+            <div class="container-contact100-form-btn">
+                <button type="submit" class="contact100-form-btn">
+                    Send Email
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    CKEDITOR.replace('message');
+</script>
+<script src="{% static 'email/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'email/vendor/animsition/js/animsition.min.js' %}"></script>
+<script src="{% static 'email/vendor/bootstrap/js/popper.js' %}"></script>
+<script src="{% static 'email/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'email/vendor/select2/select2.min.js' %}"></script>
+<script src="{% static 'email/vendor/daterangepicker/moment.min.js' %}"></script>
+<script src="{% static 'email/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<script src="{% static 'email/vendor/countdowntime/countdowntime.js' %}"></script>
+<script src="{% static 'email/js/map-custom.js' %}"></script>
+<script src="{% static 'email/js/main.js' %}"></script>
+
+
+</body>
+</html>
