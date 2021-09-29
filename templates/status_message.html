@@ -12,6 +12,7 @@
 <body>
 Hello {{ name }}, Welcome to GO-Immigration.
 <p>You recently moved from the point of
+{% if nose and new_value %}
     {% if nose == 0 %}
         <span><b></b></span>
     {% elif nose == 10 %}
@@ -34,10 +35,7 @@ Hello {{ name }}, Welcome to GO-Immigration.
         <span><b>Permis d'etude</b></span>
     {% elif nose == 100 %}
         <span><b>Arrivcan</b></span>
-    {% endif %}
-    to <span>{% if new_value %}
-    {% if new_value == 0 %}
-        <span><b></b></span>
+        to <span>
     {% elif new_value == 10 %}
         <span><b>Signature du Contrat</b></span>
     {% elif new_value == 20 %}
@@ -58,6 +56,8 @@ Hello {{ name }}, Welcome to GO-Immigration.
         <span><b>Permis d'etude</b></span>
     {% elif new_value == 100 %}
         <span><b>Arrivcan</b></span>
-    {% endif %}{% else %}Grandmer{% endif %}</span></p>
+    {% endif %}
+    </span></p>
+{% endif %}
 </body>
 </html>

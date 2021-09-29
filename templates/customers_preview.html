@@ -202,6 +202,7 @@
                                         <div class="text-black
                                         border-0 rounded
                                          relative alert alert-success"
+                                             id="success-alert"
                                         >
                                             <button
                                                     class="border-0"
@@ -226,14 +227,14 @@
                                                     element = element.parentNode;
                                                 }
                                                 element.parentNode.parentNode.removeChild(element.parentNode);
+                                                setTimeout(200);
                                             }
                                         </script>
                                     </div>
                                     {% for item1, item2, item3, item4 in list %}
                                         <tr>
-                                        <td>
-                                            {#                                            <a class="text-black text-decoration-none"#}
-                                            {#                                               href="{{ item1.photo.url }}">#}
+                                        <td><!--<a class="text-black text-decoration-none"
+                                               href="{{ item1.photo.url }}">-->
                                             <img class="rounded-circle me-2"
                                                  style="object-fit: contain;
                                                      background-color:#91debb; border:1px solid palegreen;"
