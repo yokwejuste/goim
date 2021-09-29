@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Table - Go Immigration</title>
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,\
@@ -14,6 +15,9 @@
     <link rel="stylesheet" href="{% static 'fonts/fontawesome-all.min.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/fontawesome5-overrides.min.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .modal {
             z-index: 1;
@@ -83,6 +87,21 @@
             }
         }
 
+        @media screen and (min-width: 0px) and (max-width: 500px) {
+            #my-content {
+                display: none;
+            }
+
+            .d {
+                width: 100%;
+            }
+
+            #success-alert {
+                font-size: 12px;
+            }
+
+            /* show it on small screens */
+        }
     </style>
 </head>
 
@@ -142,41 +161,55 @@
             <div class="container-fluid">
                 <h3 class="text-dark mb-4">Customers</h3>
                 <div class="card shadow">
-                    <div class="card-header py-3">
-                        <p class="text-primary m-0 fw-bold">Customer's Information &nbsp;
-                            <a class="float-right text-decoration-none"
-                               href="{% url 'pdf_download' %}">
-                                <button type="button"
-                                        class="btn btn-info">
-                                    <i class="fas fa-download"></i>&nbsp; Download Report PDF
-                                </button>&nbsp;&nbsp;
-                            </a> &nbsp;&nbsp;<a class="float-right text-decoration-none"
-                                                href="{% url 'calendar' %}">
-                                <button type="button"
-                                        class="btn btn-warning">
-                                    <i class="fas fa-calendar-week"></i>&nbsp; Calendar
-                                </button>&nbsp;&nbsp;
-                            </a> <a class="float-right text-decoration-none"
-                                    href="{% url 'pdf_view' %}">
-                                <button type="button"
-                                        class="btn btn-success">
-                                    <i class="fas fa-eye"></i>&nbsp; View Report PDF
-                                </button>&nbsp;&nbsp;
-                            </a> &nbsp;
-                            <a class="float-center text-decoration-none" href="{% url 'choices' %}">
-                                <button type="button"
-                                        class="btn btn-primary">
-                                    <i class="fas fa-plus"></i>&nbsp; Add A Customer
-                                </button>
-                            </a>&nbsp;
-                            <a class="float-center text-decoration-none" href="{% url 'dashboard' %}">
-                                <button type="button"
-                                        class="btn btn-info">
-                                    <i class="fas fa-user-circle"></i>&nbsp;Dashboard
-                                </button>
-                            </a>
-                        </p>
-
+                    <div class="card-header">
+                        <div class="text-primary m-0 fw-bold">Customer's Information &nbsp;
+                            <button type="button" class="navbar-toggle text-success rounded"
+                                    data-toggle="collapse"
+                                    data-target="#myNavbar">
+                                <i onclick="myFunction(this)" class="fa fa-bars"></i>
+                            </button>
+                            <script>
+                                function myFunction(x) {
+                                    x.classList.toggle("fa-times");
+                                    x.classList.toggle("fa-bars");
+                                }
+                            </script>
+                            <div class="collapse navbar-collapse" id="myNavbar">
+                                <a class="float-right d text-decoration-none"
+                                   href="{% url 'pdf_download' %}">
+                                    <button type="button"
+                                            class="btn d btn-info">
+                                        <i class="fas fa-download"></i>&nbsp; Download Report PDF
+                                    </button>&nbsp;&nbsp;
+                                </a> &nbsp;&nbsp;
+                                <a class="float-right d text-decoration-none"
+                                   href="{% url 'calendar' %}">
+                                    <button type="button"
+                                            class="btn d btn-warning">
+                                        <i class="fas fa-calendar-week"></i>&nbsp; Calendar
+                                    </button>&nbsp;&nbsp;
+                                </a>
+                                <a id="my-content" class="float-right d text-decoration-none"
+                                   href="{% url 'pdf_view' %}">
+                                    <button type="button"
+                                            class="btn d btn-success">
+                                        <i class="fas fa-eye"></i>&nbsp; View Report PDF
+                                    </button>&nbsp;&nbsp;
+                                </a> &nbsp;
+                                <a class="float-center text-decoration-none" href="{% url 'choices' %}">
+                                    <button type="button"
+                                            class="btn d btn-primary">
+                                        <i class="fas fa-plus"></i>&nbsp; Add A Customer
+                                    </button>
+                                </a>&nbsp;
+                                <a class="float-center d text-decoration-none" href="{% url 'dashboard' %}">
+                                    <button type="button"
+                                            class="btn d btn-info">
+                                        <i class="fas fa-user-circle"></i>&nbsp;Dashboard
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive table mt-2" id="dataTable" role="grid"
@@ -211,7 +244,7 @@
 
                                             </button>
                                             <span
-                                                    class="inline-block text-center">
+                                                    class="inline-block text-center" style="top: 20%">
                                                 There {% if detail.count == 1 %}is{% else %}are{% endif %}
                                                 {% if detail.count == 0 %}
                                                     <b class="text-danger">{{ detail.count }}</b>
