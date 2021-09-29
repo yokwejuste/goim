@@ -133,16 +133,16 @@ class GoCustomerStatusForm(forms.ModelForm):
         fields = '__all__'
         VALUE_CHOICES = (
             ('', 'How far has the customer gone?'),
-            (10, 'a'),
-            (20, 'b'),
-            (30, 'c'),
-            (40, 'd'),
-            (50, 'e'),
-            (60, 'f'),
-            (70, 'g'),
-            (80, 'h'),
-            (90, 'i'),
-            (100, 'j'),
+            (10, 'Signature du Contrat'),
+            (20, 'Documents par universite'),
+            (30, 'Denamnde et Obtention d\'admission a l\'universite'),
+            (40, 'Demande et Obtention de CAQ'),
+            (50, 'Demande de PE'),
+            (60, 'Fournir les donees biometrique'),
+            (70, 'Examens Medicaux'),
+            (80, 'Demande de Passport'),
+            (90, 'Permis d\'etude'),
+            (100, 'Arrivcan'),
         )
         widgets = {
             'name': forms.Select(
