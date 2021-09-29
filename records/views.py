@@ -353,8 +353,6 @@ def customer_status(request, customer_status_id=None):
         nose = GoCustomerStatus.objects.get(pk=customer_status_id)
         email_d = GoCustomerRegistration.objects.get(pk=customer_status_id)
         new_val = request.POST['value']
-        print(new_val)
-        print(f'nose {nose.value}')
         subject_d = f'{name_k} has Changed Status.'
         cong = {
             'username': username,
@@ -498,3 +496,7 @@ def event(request, event_id=None):
         form.save()
         return HttpResponseRedirect(reverse('preview'))
     return render(request, 'event.html', {'form': form})
+
+
+def handler500(request):
+    return render(request, '500.html', status=500)
