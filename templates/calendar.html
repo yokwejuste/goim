@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <div class="clearfix">
-        <a class="btn btn-info left" href="{% url 'calendar' %}?{{ prev_month }}"><i class="fas fa-backward"></i> Previous Month </a>
-        <a class="btn btn-info left" href="{% url 'dashboard' %}"><i class="fas fa-user-circle"></i> Dashboard </a>
-        <a class="btn btn-info right" href="{% url 'calendar' %}?{{ next_month }}"><i class="fas fa-forward"></i> Next Month </a>
+    <div class="w-full clearfix">
+        <a class="btn bn btn-info left" href="{% url 'calendar' %}?{{ prev_month }}"><i class="fas fa-backward"></i> Previous Month </a>
+        <a class="btn bn btn-info left" href="{% url 'dashboard' %}"><i class="fas fa-user-circle"></i> Dashboard </a>
+        <a class="btn bn btn-info right" href="{% url 'calendar' %}?{{ next_month }}"><i class="fas fa-forward"></i> Next Month </a>
     </div>
     {{ calendar }}
 {% endblock %}

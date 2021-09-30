@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Upload Files</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
 </head>
 <body style="background-color: #16d93c;">
-<div class="container">
+<div class="container fullscreen">
     <div class="card shadow-lg o-hidden border-0 my-3">
         <div class="card-body p-0">
             <div class="row">
@@ -23,7 +23,7 @@
                     <div class="p-5">
                         <h1>Hey <span class="text-uppercase">{{ request.user.username }}</span>, register
                             a new customer</h1>
-                        <div id="container">
+                        <div>
                             <div>
                                 <span class="text-uppercase">{{ request.user.username }}</span>
                                 <span id="text"></span>
@@ -36,7 +36,7 @@
                                   action="{% url 'upload' %}">
                                 {% csrf_token %}
                                 {{ document_form }}
-                                <input class="btn btn-secondary d - block btn - user w - 100"
+                                <input class="btn btn-secondary d-block btn-user w-100"
                                        type="submit">
                             </form>
 
@@ -49,5 +49,6 @@
     </div>
 </div>
 <script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 </body>
 </html>

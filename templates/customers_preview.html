@@ -101,6 +101,9 @@
             }
 
             /* show it on small screens */
+            .progress > .progress-bar , progress{
+                height: 3px !important;
+            }
         }
     </style>
 </head>
@@ -298,7 +301,7 @@
                                         <td>
                                             <span>{{ item2.value }}%</span>
                                             {% if item2.value == 100 %} <span>🥰</span>
-                                                <div class="progress">
+                                                <div class="progress progress-sm">
                                                     <div class="progress-bar bg-{{ item4 }}" role="progressbar"
                                                          style="width: {{ item2.value }}%"
                                                          aria-valuenow="{{ item2.value }}" aria-valuemin="0"

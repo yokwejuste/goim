@@ -101,12 +101,12 @@ class GoCustomerRegistrationForm(forms.ModelForm):
                        'placeholder': 'What is his/her Destination'}
             ),
             'photo': forms.ClearableFileInput(
-                attrs={'class': 'btn btn-primary d - block btn - user w - 100  m-lg-2',
+                attrs={'class': 'btn btn-primary d - block btn-user w-100  m-lg-2',
                        'placeholder': 'Drop his/her` picture', },
             ),
             'documents': forms.FileInput(
                 attrs={'multiple': False, 'class': ' mb-lg-2 btn btn-primary  m-lg-2'
-                                                   ' d - block btn - user w - 100',
+                                                   ' d-block btn-user w-100',
                        'placeholder': 'Drop his files at once here'},
             ),
             'phone_number': forms.NumberInput(
