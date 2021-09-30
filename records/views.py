@@ -285,6 +285,8 @@ def send_files(request):
 
 
 def home(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
     context_c = {
 
     }
@@ -312,7 +314,7 @@ def customer_status_change(request, customer_status_id=None):
     if request.POST and form.is_valid():
         its = request.POST['name']
         name_k = GoCustomerRegistration.objects.get(pk=its)
-        email_d = GoCustomerRegistration.objects.get(pk=customer_status_id)
+        email_d = GoCustomerRegistration.objects.get(pk=its)
         new_val = request.POST['value']
         subject_d = f'{name_k} has Changed Status.'
         cong = {
