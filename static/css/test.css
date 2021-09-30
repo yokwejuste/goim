@@ -1,5 +1,5 @@
 .calendar {
-    width: 98%;
+    width: 90%;
     margin: auto;
     font-size: 13px;
 }
@@ -17,7 +17,7 @@
 .calendar td {
     width: 200px;
     height: 150px;
-    padding: 20px 0px 0px 5px;
+    padding: 20px 0 0 5px;
 }
 
 .month {
@@ -30,7 +30,7 @@
 
 ul {
     height: 100%;
-    padding: 0px 5px 0px 20px;
+    padding: 0 5px 0 20px;
 }
 
 a {
