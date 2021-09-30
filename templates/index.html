@@ -47,59 +47,70 @@
 <body onload="myFunction()" class="flex justify-center items-center bg-gray-900 h-screen" style="margin: 0;">
 <div id="loader" class="flex space-x-2 p-40 rounded-full justify-center items-center">
     <div class="middle">
-        <div class="loader"></div>
+        <div class="text-white text-3xl sm:text-5xl font-bold">
+            Day :
+                <span class="text-center my-auto copyright"><span><script>
+                document.write(new Date().getDate());
+            </script></span>/&nbsp;<span><script>
+                document.write(new Date().getMonth());
+            </script></span>/&nbsp;<span><script>
+                document.write(new Date().getFullYear());
+            </script></span>
+            </span>
+            <br><br>
+            <div class="loader"></div>
+        </div>
     </div>
 </div>
+    <main style="display: none;" id="myDiv">
 
-<main style="display: none;" id="myDiv">
-
-    <section class="bg-gray-300 py-20 lg:py-28 sm:rounded-xl">
-        <div class="container mx-auto px-5">
-            <div class="grid lg:grid-cols-2 gap-10 items-center text-center lg:text-left">
-                <div class="space-y-8">
-                    <div class="space-y-4">
-                        <h2 class="text-3xl sm:text-5xl font-bold">Go Immigration</h2>
-                        <p class="text-xl text-gray-600">A Better View for Emigration in Africa</p>
-                    </div>
-                    <div class="flex justify-center lg:justify-start items-center space-x-4">
-                        <a href="{% url 'login' %}"
-                           class="inline-block rounded-full px-6
+        <section class="bg-gray-300 py-20 lg:py-28 sm:rounded-xl">
+            <div class="container mx-auto px-5">
+                <div class="grid lg:grid-cols-2 gap-10 items-center text-center lg:text-left">
+                    <div class="space-y-8">
+                        <div class="space-y-4">
+                            <h2 class="text-3xl sm:text-5xl font-bold">Go Immigration</h2>
+                            <p class="text-xl text-gray-600">A Better View for Emigration in Africa</p>
+                        </div>
+                        <div class="flex justify-center lg:justify-start items-center space-x-4">
+                            <a href="{% url 'login' %}"
+                               class="inline-block rounded-full px-6
                            py-3 bg-white hover:bg-blue-900 text-blue-800
                             hover:text-white shadow transition
                              duration-300 hover:shadow-lg
                              text-lg font-semibold">Login</a>
-                        <a href="{% url 'register' %}"
-                           class="inline-block rounded-full px-6
+                            <a href="{% url 'register' %}"
+                               class="inline-block rounded-full px-6
                            py-3 bg-white hover:bg-red-800 text-red-800
                             hover:text-white shadow transition
                              duration-300 hover:shadow-lg
                              text-lg font-semibold">Register</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img class="rounded-full" src="{% static 'img/logo.png' %}" alt="Drone">
                     </div>
                 </div>
-                <div>
-                    <img class="rounded-full" src="{% static 'img/logo.png' %}" alt="Drone">
-                </div>
             </div>
-        </div>
-    </section>
-</main>
+        </section>
+    </main>
 
-<div style="display:none;" id="myDiv">
-    <img class="align-self-center border-red-700" src="{% static 'img/logo.png' %}" alt="">
-</div>
+    <div style="display:none;" id="myDiv">
+        <img class="align-self-center border-red-700" src="{% static 'img/logo.png' %}" alt="">
+    </div>
 
-<script>
-    var myVar;
+    <script>
+        var myVar;
 
-    function myFunction() {
-        myVar = setTimeout(showPage, 4000);
-    }
+        function myFunction() {
+            myVar = setTimeout(showPage, 4000);
+        }
 
-    function showPage() {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("myDiv").style.display = "block";
-    }
-</script>
-<script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+        function showPage() {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("myDiv").style.display = "block";
+        }
+    </script>
+    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 </body>
 </html>
