@@ -310,15 +310,14 @@ def customer_status_change(request, customer_status_id=None):
 
     form = GoCustomerStatusForm(request.POST or None, instance=instance)
     if request.POST and form.is_valid():
-        name_k = GoCustomerRegistration.objects.get(pk=customer_status_id)
-        nose = GoCustomerStatus.objects.get(pk=customer_status_id)
+        its = request.POST['name']
+        name_k = GoCustomerRegistration.objects.get(pk=its)
         email_d = GoCustomerRegistration.objects.get(pk=customer_status_id)
         new_val = request.POST['value']
         subject_d = f'{name_k} has Changed Status.'
         cong = {
             'username': username,
             'name': name_k.name,
-            'nose': nose.value,
             'new_value': new_val,
         }
         from_email = settings.EMAIL_HOST_USER

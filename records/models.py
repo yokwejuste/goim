@@ -106,7 +106,7 @@ class GoCustomerStatus(models.Model):
                                 on_delete=models.CASCADE, primary_key=True,
                                 null=False,
                                 )
-    value = models.IntegerField(default=0, verbose_name='Level', null=False, primary_key=False)
+    value = models.IntegerField(verbose_name='Level', null=False, primary_key=False)
 
     class Meta:
         verbose_name_plural = 'Customers Status'
