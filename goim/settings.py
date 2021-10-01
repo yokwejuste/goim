@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user_visit',
     'records',
+    'captcha',
     # 'gdstorage',
     'django_agenda',
 ]
@@ -175,3 +176,6 @@ sentry_sdk.init(
     # django.contrib.auth) you may enable sending PII data.
     send_default_pii=True
 )
+
+RECAPTCHA_PUBLIC_KEY = '6LctzZ4cAAAAAO0Jq6jdeYssfyCf8aFz-MAf03nG'
+RECAPTCHA_PRIVATE_KEY = '6LctzZ4cAAAAAH0GAyMQjsHbJPGW98VyyvZF45E2'

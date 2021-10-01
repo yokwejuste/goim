@@ -1,3 +1,5 @@
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -7,6 +9,8 @@ from records.models import *
 
 
 class EventForm(ModelForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+
     class Meta:
         model = Event
         # datetime-local is a HTML5 input type, format to make date time show on fields
@@ -24,6 +28,7 @@ class EventForm(ModelForm):
 
 
 class UserRegistrationForm(UserCreationForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
     password1 = forms.CharField(label="Password", max_length=20,
                                 widget=forms.PasswordInput(
                                     attrs={"class": 'form-control form-control-user'
@@ -70,6 +75,8 @@ class UserLoginForm(forms.ModelForm):
 
 
 class GoCustomerRegistrationForm(forms.ModelForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+
     class Meta:
         model = GoCustomerRegistration
         fields = '__all__'
@@ -128,6 +135,8 @@ class UserProfile(forms.ModelForm):
 
 
 class GoCustomerStatusForm(forms.ModelForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+
     class Meta:
         model = GoCustomerStatus
         fields = '__all__'
