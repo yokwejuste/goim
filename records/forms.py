@@ -9,8 +9,6 @@ from records.models import *
 
 
 class EventForm(ModelForm):
-    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
-
     class Meta:
         model = Event
         # datetime-local is a HTML5 input type, format to make date time show on fields
@@ -76,7 +74,6 @@ class UserLoginForm(forms.ModelForm):
 
 
 class GoCustomerRegistrationForm(forms.ModelForm):
-    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
 
     class Meta:
         model = GoCustomerRegistration
@@ -136,7 +133,6 @@ class UserProfile(forms.ModelForm):
 
 
 class GoCustomerStatusForm(forms.ModelForm):
-    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
 
     class Meta:
         model = GoCustomerStatus
