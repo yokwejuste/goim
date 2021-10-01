@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+import django_heroku
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'captcha',
     # 'gdstorage',
     'django_agenda',
+    'django_heroku',
 ]
 
 MIDDLEWARE = [
@@ -80,10 +82,22 @@ WSGI_APPLICATION = 'goim.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(str(BASE_DIR), 'data.sqlite3'),
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(str(BASE_DIR), 'data.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd41jn02nj55sts',
+        'USER': 'gwzujuygdeblbj',
+        'PASSWORD': '024b33447f71b638574421f6fd68a3afb2802f5ef75c116c72ad869433d2adba',
+        'HOST': 'ec2-3-219-111-26.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -130,11 +144,12 @@ LOGOUT_REDIRECT_URL = 'logout'
 
 STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'staticfiles'),
+    os.path.join(BASE_DIR, 'static'),
 ]
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+django_heroku.settings(locals())
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type

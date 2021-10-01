@@ -54,11 +54,12 @@ class UserRegistrationForm(UserCreationForm):
 
 
 class UserLoginForm(forms.ModelForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
     password = forms.CharField(label='password', widget=forms.PasswordInput(
         attrs={"class": 'form-control form-control-user'}
     ))
     username = forms.CharField(label='username', widget=forms.TextInput(
-        attrs={"class": 'form-control form-control-user',}
+        attrs={"class": 'form-control form-control-user', }
     ))
 
     class Meta:
