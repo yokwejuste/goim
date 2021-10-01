@@ -38,6 +38,10 @@
                                     </label>
                                         {{ login_form.password }}
                                     </div>
+                                    <br>
+                                    <div><label for="recaptcha">{{ login_form.captcha.label }}</label>
+                                        {{ login_form.captcha }}
+                                    </div>
                                     {% for error in login_form.errors %}
                                         <p class="text-danger">{{ error }}</p>
                                     {% endfor %}
