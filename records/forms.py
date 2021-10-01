@@ -58,7 +58,7 @@ class UserLoginForm(forms.ModelForm):
         attrs={"class": 'form-control form-control-user'}
     ))
     username = forms.CharField(label='username', widget=forms.TextInput(
-        attrs={"class": 'form-control form-control-user', 'type': 'password'}
+        attrs={"class": 'form-control form-control-user',}
     ))
 
     class Meta:
