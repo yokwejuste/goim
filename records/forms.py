@@ -44,7 +44,7 @@ class UserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = GoUser
-        fields = ('username', 'name', 'email', 'phone', 'password1', 'password2')
+        fields = '__all__'
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control form-control-user'}),
             'name': forms.TextInput(attrs={'class': 'form-control form-control-user'}),
@@ -64,7 +64,7 @@ class UserLoginForm(forms.ModelForm):
 
     class Meta:
         model = GoUser
-        fields = ('username', 'password')
+        fields = '__all__'
 
     def clean(self):
         if self.is_valid():
