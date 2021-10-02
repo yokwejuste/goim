@@ -3,6 +3,7 @@ from pathlib import Path
 
 import django_heroku
 import sentry_sdk
+from decouple import config
 from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -13,16 +14,15 @@ BASE_DIR = os.path.dirname(PROJECT_ROOT)
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@eer0w_b%@p3nksx&)mq5-u^vrqxloeybj4m63hhzjik02smbo'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
     'goim.herokuapp.com',
     '0.0.0.0',
     '127.0.0.1',
-    '192.168.0.1',
     'https://goim.herokuapp.com/',
 
 ]
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'records',
     'captcha',
     # 'gdstorage',
+    'storages',
     'django_agenda',
     'django_heroku',
 ]
@@ -92,11 +93,11 @@ WSGI_APPLICATION = 'goim.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd41jn02nj55sts',
+        'ENGINE': config('ENGINE'),
+        'NAME': config('DBNAME'),
         'USER': 'gwzujuygdeblbj',
-        'PASSWORD': '024b33447f71b638574421f6fd68a3afb2802f5ef75c116c72ad869433d2adba',
-        'HOST': 'ec2-3-219-111-26.compute-1.amazonaws.com',
+        'PASSWORD': config('PASSWORD'),
+        'HOST': config('HOST'),
         'PORT': '5432',
     }
 }
@@ -162,15 +163,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # 'data' is my media folder
 MEDIA_URL = '/media/'
 # email settings
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = config('EMAIL_BACKEND')
 DEFAULT_FROM_EMAIL = 'Go Immigration'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'emails')
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'yokwejuste@gmail.com'
-EMAIL_HOST_PASSWORD = '119175013'
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
-
+EMAIL_USE_SSL = True
 # Google cloud storage
 # GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE =
 
@@ -179,7 +180,7 @@ EMAIL_USE_TLS = True
 AUTH_USER_MODEL = 'records.GoUser'
 
 sentry_sdk.init(
-    dsn="https://fb43c0356b434f938310f9b7e50dba92@o1007194.ingest.sentry.io/5969905",
+    dsn=config('dsn'),
     integrations=[DjangoIntegration()],
 
     # Set traces_sample_rate to 1.0 to capture 100%
@@ -192,5 +193,13 @@ sentry_sdk.init(
     send_default_pii=True
 )
 
-RECAPTCHA_PUBLIC_KEY = '6LctzZ4cAAAAAO0Jq6jdeYssfyCf8aFz-MAf03nG'
-RECAPTCHA_PRIVATE_KEY = '6LctzZ4cAAAAAH0GAyMQjsHbJPGW98VyyvZF45E2'
+RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
+
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'

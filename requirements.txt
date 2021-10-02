@@ -10,7 +10,7 @@ charset-normalizer==2.0.4
 cssselect2==0.4.1
 cssutils==2.3.0
 dj-database-url==0.5.0
-Django==3.2.7
+Django~=3.2.7
 django-agenda==0.7.2
 django-appconf==1.0.4
 django-bootstrap4==3.0.1
@@ -70,7 +70,7 @@ sqlparse==0.4.1
 subject==0.1.0
 supervisor==4.2.2
 tinycss2==1.1.0
-twilio==6.63.2
+twilio~=6.63.2
 ua-parser==0.10.0
 uritemplate==3.0.1
 urllib3==1.26.6
@@ -79,5 +79,7 @@ visa==1.0.0
 weasyprint==53.2
 webencodings==0.5.1
 whitenoise==5.3.0
-xhtml2pdf==0.2.5
-zopfli==0.1.8
+xhtml2pdf~=0.2.5
+python-decouple~=3.5
+django-storages~=1.11.1
+boto3~=1.18.53
