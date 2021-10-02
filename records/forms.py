@@ -74,6 +74,7 @@ class UserLoginForm(forms.ModelForm):
 
 
 class GoCustomerRegistrationForm(forms.ModelForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
 
     class Meta:
         model = GoCustomerRegistration
@@ -133,7 +134,6 @@ class UserProfile(forms.ModelForm):
 
 
 class GoCustomerStatusForm(forms.ModelForm):
-
     class Meta:
         model = GoCustomerStatus
         fields = '__all__'
