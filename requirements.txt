@@ -55,6 +55,7 @@ pydyf==0.1.1
 PyJWT==1.7.1
 pynliner==0.8.0
 pyparsing==2.4.7
+pip>=21.2.0
 PyPDF2==1.26.0
 pyphen==0.11.0
 python-bidi==0.4.2
