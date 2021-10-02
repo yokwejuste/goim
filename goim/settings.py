@@ -158,7 +158,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # 'data' is my media folder
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media'
 # email settings
 
 EMAIL_BACKEND = config('EMAIL_BACKEND')
