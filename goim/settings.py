@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'storages',
     'django_agenda',
     'django_heroku',
+    'fontawesome-free',
 ]
 
 MIDDLEWARE = [
@@ -199,7 +200,6 @@ sentry_sdk.init(
 
 RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
-
 
 # Amazon config
 AWS_LOCATION = 'static'
