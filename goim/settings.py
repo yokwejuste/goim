@@ -18,7 +18,7 @@ BASE_DIR = os.path.dirname(PROJECT_ROOT)
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'goim.herokuapp.com',
