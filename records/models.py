@@ -50,7 +50,7 @@ class GoUser(AbstractBaseUser):
     name = models.CharField(verbose_name='Full Name', max_length=200, unique=True)
     phone = models.CharField(verbose_name="Phone Number", max_length=20, null=False)
     date_joined = models.DateTimeField(verbose_name='Created On', auto_now_add=True)
-    profile = models.ImageField(verbose_name='Picture', upload_to=f'profiles/%Y/{username}',
+    profile = models.ImageField(verbose_name='Picture', upload_to=f'profiles/%Y/',
                                 default='profile1.png',
                                 null=False)
     last_login = models.DateTimeField(verbose_name='Last login', auto_now=True, null=False)
