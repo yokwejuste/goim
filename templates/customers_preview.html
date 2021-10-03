@@ -245,9 +245,10 @@
                                             </button>
                                             <span
                                                     class="inline-block text-center" style="top: 20%">
-                                                There {% if detail.count == 1 %}is{% else %}are{% endif %}
+                                                There {% if detail.count == 1 or 0 %}is{% else %}
+                                                &nbsp;are{% endif %}
                                                 {% if detail.count == 0 %}
-                                                    <b class="text-danger">{{ detail.count }}</b>
+                                                    <b class="text-danger">&nbsp;no</b>
                                                 {% else %}
                                                     <b class="text-success">{{ detail.count }}</b>
                                                 {% endif %} customers recorded
