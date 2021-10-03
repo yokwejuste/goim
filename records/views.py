@@ -276,7 +276,7 @@ def send_files(request):
             return redirect('customer_status')
         else:
             HttpResponse(f'Invalid data from {request.user.username}')
-        cong[['document_form']] = form
+        cong['document_form'] = form
 
     else:
         form = GoCustomerRegistrationForm
