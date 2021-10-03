@@ -271,8 +271,9 @@ def send_files(request):
                 [email_d],
             )
             hey.attach_alternative(html_message, 'text/html')
-            hey.send()
+
             form.save()
+            hey.send()
             return redirect('customer_status')
         else:
             HttpResponse(f'Invalid data from {request.user.username}')
