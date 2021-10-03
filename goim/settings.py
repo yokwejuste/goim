@@ -21,12 +21,12 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
-    'goim.herokuapp.com',
-    'wwww.goim.herokuapp.com',
+    # 'goim.herokuapp.com',
+    # 'wwww.goim.herokuapp.com',
     'www.goimrecords.company',
-    '0.0.0.0',
-    '127.0.0.1',
-    'https://goim.herokuapp.com/',
+    # '0.0.0.0',
+    # '127.0.0.1',
+    # 'https://goim.herokuapp.com/',
     'goimrecords.company',
     'https://goimrecords.company',
     'https://goimrecords.company',
