@@ -1,1 +1,1 @@
-web: gunicorn goim.wsgi --log-file -
+web: gunicorn goim.wsgi
