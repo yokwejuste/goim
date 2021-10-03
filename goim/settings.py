@@ -4,6 +4,7 @@ from pathlib import Path
 import django_heroku
 import sentry_sdk
 from decouple import config
+from django.conf.locale import en
 from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,6 +25,9 @@ ALLOWED_HOSTS = [
     '0.0.0.0',
     '127.0.0.1',
     'https://goim.herokuapp.com/',
+    'goimrecords.company',
+    'https://goimrecords.company',
+    'https://goimrecords.company',
 
 ]
 
@@ -157,8 +161,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # 'data' is my media folder
-MEDIA_URL = 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static')  # 'data' is my media folder
+MEDIA_URL = 'static'
 # email settings
 
 EMAIL_BACKEND = config('EMAIL_BACKEND')
