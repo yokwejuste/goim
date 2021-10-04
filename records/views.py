@@ -84,6 +84,7 @@ def search_result(request):
         search = request.POST['search']
         results = \
             GoCustomerRegistration.objects.filter(
+                name__search=search,
                 name__contains=search
             )
         return render(request,
