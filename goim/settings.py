@@ -178,7 +178,6 @@ MEDIA_URL = 'static/'
 # EMAIL_USE_TLS = True
 
 
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = 'Go Immigration'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'emails')
@@ -187,7 +186,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'postmaster@sandboxa537503d600848c59d439b0232316710.mailgun.org'
 EMAIL_HOST_PASSWORD = '54a13d599da6def9d2fd8533016d583e-dbdfb8ff-07ff7189'
 EMAIL_USE_TLS = True
-
 
 # Google cloud storage
 # GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE =
