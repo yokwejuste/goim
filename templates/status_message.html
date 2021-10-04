@@ -13,7 +13,6 @@
 <body>
 Hello {{ name }}, Welcome to GO-Immigration.
 <p>You recently moved from the point of
-{% if nose and new_value %}
     {% if nose == 0 %}
         <span><b></b></span>
     {% elif nose == 10 %}
@@ -36,7 +35,13 @@ Hello {{ name }}, Welcome to GO-Immigration.
         <span><b>Permis d'etude</b></span>
     {% elif nose == 100 %}
         <span><b>Arrivcan</b></span>
-        to <span>
+    {% else %}
+        <i class="text-danger">Nothing to show up!</i>
+    {% endif %}
+    to <span>
+    {% if new_value is None %}
+        <br><i class="text-danger"> something seriously when
+            wrong with our system.</i>
     {% elif new_value == 10 %}
         <span><b>Signature du Contrat</b></span>
     {% elif new_value == 20 %}
@@ -58,7 +63,7 @@ Hello {{ name }}, Welcome to GO-Immigration.
     {% elif new_value == 100 %}
         <span><b>Arrivcan</b></span>
     {% endif %}
-    </span></p>
-{% endif %}
+        </span>
+</p>
 </body>
 </html>
