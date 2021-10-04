@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{% static 'email/vendor/bootstrap/css/bootstrap.min.css' %}">
-    <<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -49,7 +49,9 @@
                 <strong>{{ request.user.username }}</strong>,&nbsp; you sent the emails
                 successfully and you will be
                 redirected to your dashboard in
-                <progress  class="progress-bar bg-warning progress progress-bar-animated w-100"  value="0" max="9"
+                <progress class="progress-bar bg-warning
+                    progress progress-bar-animated w-100"
+                          value="0" max="9"
                           id="progressBar">
                 </progress>
                 <button type="button" class="btn-close close" data-dismiss="alert" data-bs-dismiss="alert"
@@ -76,7 +78,6 @@
                 </label>
                 <span class="focus-input100"></span>
             </div>
-
             <div class="container-contact100-form-btn">
                 <button type="submit" class="contact100-form-btn">
                     Send Email
