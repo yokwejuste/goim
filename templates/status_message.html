@@ -12,7 +12,9 @@
 </head>
 <body>
 Hello {{ name }}, Welcome to GO-Immigration.
-<p>You recently moved from the point of
+<p>Some recent changes have been made to your file!</p>
+
+<div>You were at the level of
     {% if nose == 0 %}
         <span><b></b></span>
     {% elif nose == 10 %}
@@ -20,7 +22,7 @@ Hello {{ name }}, Welcome to GO-Immigration.
     {% elif nose == 20 %}
         <span><b>Documents par universite</b></span>
     {% elif nose == 30 %}
-        <span><b>Denamnde et Obtention d'admission a l'universite</b></span>
+        <span><b>Denamnde et new_valueObtention d'admission a l'universite</b></span>
     {% elif nose == 40 %}
         <span><b>Demande et Obtention de CAQ</b></span>
     {% elif nose == 50 %}
@@ -38,10 +40,10 @@ Hello {{ name }}, Welcome to GO-Immigration.
     {% else %}
         <i class="text-danger">Nothing to show up!</i>
     {% endif %}
-    to <span>
-    {% if new_value is None %}
+    and now you are at the point of
+    {% if new_value == 0 %}
         <br><i class="text-danger"> something seriously when
-            wrong with our system.</i>
+        wrong with our system.</i>
     {% elif new_value == 10 %}
         <span><b>Signature du Contrat</b></span>
     {% elif new_value == 20 %}
@@ -62,8 +64,9 @@ Hello {{ name }}, Welcome to GO-Immigration.
         <span><b>Permis d'etude</b></span>
     {% elif new_value == 100 %}
         <span><b>Arrivcan</b></span>
+    {% else %}
+        <i>Nothing to show up</i>
     {% endif %}
-        </span>
-</p>
+</div>
 </body>
 </html>
