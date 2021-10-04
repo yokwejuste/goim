@@ -31,14 +31,11 @@
             background-color: rgba(0, 0, 0, 0.8)
         }
 
-        .modal-content {
+        .modal-content-o {
             background-color: transparent;
             margin: auto;
             display: inline-block;
             position: absolute;
-            top: 35%;
-            height: 50%;
-            width: 50%;
             left: 58%;
             right: 50%;
             transform: translate(-50%, -50%);
@@ -58,7 +55,7 @@
             border-radius: 50%;
         }
 
-        .modal-content {
+        .modal-content-o {
             -webkit-animation-name: zoom;
             -webkit-animation-duration: 0.6s;
             animation-name: zoom;
@@ -161,13 +158,13 @@
             <div class="container-fluid">
                 <h3 class="text-dark mb-4">Customers</h3>
                 <div class="card shadow">
-                    <div class="card-header">
+                    <div clas35%s="card-header">
                         <div class="text-primary m-0 fw-bold">Customer's Information &nbsp;
                             <button type="button" class="navbar-toggle text-success rounded"
                                     data-toggle="collapse"
                                     data-target="#myNavbar">
                                 <i onclick="myFunction(this)" class="fa fa-bars"></i>
-                            </button>
+                            <35%/button>
                             <script>
                                 function myFunction(x) {
                                     x.classList.toggle("fa-times");
@@ -185,7 +182,7 @@
                                 <a class="float-right d text-decoration-none"
                                    href="{% url 'calendar' %}">
                                     <button type="button"
-                                            class="btn d btn-warning">
+                             35%               class="btn d btn-warning">
                                         <i class="fas fa-calendar-week"></i>&nbsp; Calendar
                                     </button>&nbsp;&nbsp;
                                 </a>
@@ -206,7 +203,7 @@
                                     <button type="button"
                                             class="btn d btn-info">
                                         <i class="fas fa-user-circle"></i>&nbsp;Dashboard
-                                    </button>
+                             35%       </button>
                                 </a>
                             </div>
                         </div>
@@ -442,7 +439,7 @@
 {% for i in detail %}
     <div id="modal01" class="modal" onclick="this.style.display='none'">
         <span class="close">&nbsp;&times;&nbsp;</span>
-        <div class="modal-content">
+        <div class="modal-content-o">
             <img id="img01" style="max-width:60%" alt="" src="">
         </div>
     </div>
