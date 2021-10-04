@@ -256,7 +256,7 @@ def send_files(request):
         if form.is_valid():
             name = request.POST['name']
             email_d = request.POST['email']
-            subject = 'Welcome to new user.'
+            subject = f'Welcome to {name}.'
             cong = {
                 'username': username,
                 'name': name,
