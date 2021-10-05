@@ -107,7 +107,7 @@ class GoCustomerRegistrationDocuments(models.Model):
         verbose_name='Full name',
         on_delete=models.CASCADE,
     )
-    documents = models.FileField(upload_to='%Y/customers/documents/')
+    # documents = models.FileField(upload_to='%Y/customers/documents/')
 
 
 class GoCustomerStatus(models.Model):
