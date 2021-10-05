@@ -100,16 +100,6 @@ class GoCustomerRegistration(models.Model):
         return self.name
 
 
-class GoCustomerRegistrationDocuments(models.Model):
-    name = models.OneToOneField(
-        GoCustomerRegistration,
-        max_length=300,
-        verbose_name='Full name',
-        on_delete=models.CASCADE,
-    )
-    # documents = models.FileField(upload_to='%Y/customers/documents/')
-
-
 class GoCustomerStatus(models.Model):
     name = models.OneToOneField(GoCustomerRegistration,
                                 max_length=300, verbose_name='Full name',
