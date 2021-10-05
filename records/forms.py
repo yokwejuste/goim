@@ -111,8 +111,8 @@ class GoCustomerRegistrationForm(forms.ModelForm):
                        'placeholder': 'Drop his/her` picture', },
             ),
             'documents': forms.FileInput(
-                attrs={'multiple': False, 'class': ' mb-lg-2 btn btn-primary  m-lg-2'
-                                                   ' d-block btn-user w-100',
+                attrs={'multiple': True, 'class': ' mb-lg-2 btn btn-primary  m-lg-2'
+                                                  ' d-block btn-user w-100',
                        'placeholder': 'Drop his files at once here'},
             ),
             'phone_number': forms.NumberInput(

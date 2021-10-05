@@ -252,8 +252,17 @@ def send_files(request):
         'username': username,
     }
     if request.POST:
-        form = GoCustomerRegistrationForm(request.POST, request.FILES)
+        form = GoCustomerRegistrationForm(
+            request.POST,
+            request.FILES.getlist('documents'))
+        documents = request.FILES.getlist('documents')
         if form.is_valid():
+            for document in documents:
+                new_doc = GoCustomerRegistrationDocuments(
+                    document=request.FILES['names'],
+                    name=request.POST['name']
+                )
+                new_doc.save()
             name = request.POST['name']
             email_d = request.POST['email']
             subject = f'Welcome to {name}.'
