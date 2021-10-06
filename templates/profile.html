@@ -105,9 +105,9 @@
                                          height="160"
                                          alt="">
                                 </a>
-                                <form action="#" method="post" enctype="multipart/form-data">
+                                <form method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
-                                    <input onclick="hide()" id="dem" class="w-50" type='file'>
+                                    <input onclick="hide()" id="dem" class="w-50" name="profile" type='file'>
                                     <div class="mb-3">
                                         <button style="display:none" id="but"
                                                 class="btn btn-primary btn-sm">Change Picture

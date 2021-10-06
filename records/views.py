@@ -164,7 +164,8 @@ def preview(request):
     arr = GoCustomerStatus.objects.all()
     next_event = Event.objects.all()
     hey_d = ['primary', 'secondary',
-             'success', 'danger', 'warning', 'info', 'dark'
+             'success', 'danger',
+             'warning', 'info', 'dark'
              ]
     hey_p = hey_d * 400
     listing = zip(detail, arr, next_event, hey_p)
