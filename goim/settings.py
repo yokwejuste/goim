@@ -18,7 +18,7 @@ BASE_DIR = os.path.dirname(PROJECT_ROOT)
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = True
 
 ALLOWED_HOSTS = [
     # 'goim.herokuapp.com',
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'user_visit',
     'records',
     'captcha',
+    # 'gdstorage',
     'storages',
     'django_agenda',
     'django_heroku',
@@ -101,10 +102,10 @@ DATABASES = {
     'default': {
         'ENGINE': config('ENGINE'),
         'NAME': config('DBNAME'),
-        'USER': config('USER'),
+        'USER': 'gwzujuygdeblbj',
         'PASSWORD': config('PASSWORD'),
         'HOST': config('HOST'),
-        'PORT': config('PORT'),
+        'PORT': '5432',
     }
 }
 
@@ -201,14 +202,14 @@ RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
 
 # Amazon config
 AWS_LOCATION = 'static'
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_ACCESS_KEY_ID = 'AKIA2OXRCB4FS53CNV4I'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'go-immigration-records'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.us-east-2.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-AWS_DEFAULT_ACL = config('AWS_DEFAULT_ACL')
-AWS_S3_FILE_OVERWRITE = config('AWS_S3_FILE_OVERWRITE', default=True, cast=bool)
+AWS_DEFAULT_ACL = 'public-read-write'
+AWS_S3_FILE_OVERWRITE = True
 # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-DEFAULT_FILE_STORAGE = config('DEFAULT_FILE_STORAGE')
+DEFAULT_FILE_STORAGE = 'records.storage_backends.MediaStorage'
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
