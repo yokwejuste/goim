@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'storages',
     'django_agenda',
     'django_heroku',
-    'fontawesome-free',
 ]
 
 MIDDLEWARE = [
