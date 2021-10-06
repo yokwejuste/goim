@@ -83,4 +83,3 @@ whitenoise==5.3.0
 xhtml2pdf~=0.2.5
 django-storages~=1.11.1
 boto3~=1.18.53
-django-environ>=0.6.0
