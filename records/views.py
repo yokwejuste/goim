@@ -102,9 +102,9 @@ def search_result(request):
 @login_required
 def dashboard(request):
     go = GoCustomerRegistration.objects.all()
-    xyz = GoCustomerRegistration.objects.filter(type__contains='student')
-    xzy = GoCustomerRegistration.objects.filter(type__contains='tourist')
-    yzx = GoCustomerRegistration.objects.filter(type__contains='worker')
+    xyz = GoCustomerRegistration.objects.filter(type__icontains='student')
+    xzy = GoCustomerRegistration.objects.filter(type__icontains='tourist')
+    yzx = GoCustomerRegistration.objects.filter(type__icontains='worker')
     data = [xyz.count(), xzy.count(), yzx.count()]
     arr = []
     book = []
@@ -344,6 +344,9 @@ def customer_status_change(request, customer_status_id=None):
 
 
 def customer_status(request, customer_status_id=None):
+    xyz = GoCustomerRegistration.objects.filter(type__icontains='student')
+    xzy = GoCustomerRegistration.objects.filter(type__icontains='tourist')
+    yzx = GoCustomerRegistration.objects.filter(type__icontains='worker')
     customer = GoCustomerRegistration.objects.get(pk=customer_status_id)
     if customer_status_id:
         instance = get_object_or_404(GoCustomerStatus, pk=customer_status_id)
@@ -358,13 +361,21 @@ def customer_status(request, customer_status_id=None):
         new_val = request.POST['value']
         subject_d = f'{name_k} has Changed Status.'
         cong = {
+            'student': xyz,
+            'tourist': xzy,
+            'worker': yzx,
             'username': username,
             'name': name_k.name,
             'nose': nose.value,
             'new_value': new_val,
         }
         from_email = settings.EMAIL_HOST_USER
-        html_message = render_to_string('status_message.html', cong, request)
+        html_message = render_to_string(
+            'status_message.html',
+            cong,
+            request,
+            None
+        )
         recipient_list = [email_d.email]
         plain_message = strip_tags(html_message)
         hey = EmailMultiAlternatives(
