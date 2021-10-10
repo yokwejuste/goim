@@ -248,10 +248,18 @@
                                                 <div style="line-height: 160%; text-align: center; word-wrap: break-word;">
                                                     <p style="font-size: 14px; line-height: 160%;"><span
                                                             style="font-family: 'courier new', courier; font-size: 16px; line-height: 25.6px;">
-                                                        Chers {{ name }}
+                                                        Chers </span>
+                                                        <span>
+                                                        {% if student %}
+                                                            ETUDIANT,
+                                                        {% elif worker %}
+                                                            TRAVAILLEUR,
+                                                        {% elif tourist %}
+                                                            TOURISTE,
+                                                        {% endif %}
+                                                    </span>{{ name }}
                                                         Nous sommes heureux de vous annoncer
                                                         que vous avez obtenue admission!
-                                                    </span>
                                                     </p>
                                                     <p style="font-size: 14px; line-height: 160%;"><strong><span
                                                             style="font-family: 'courier new', courier; font-size: 16px; line-height: 25.6px;">Pour la suite de votre procédure

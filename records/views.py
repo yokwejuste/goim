@@ -344,9 +344,18 @@ def customer_status_change(request, customer_status_id=None):
 
 
 def customer_status(request, customer_status_id=None):
-    xyz = GoCustomerRegistration.objects.filter(type__icontains='student')
-    xzy = GoCustomerRegistration.objects.filter(type__icontains='tourist')
-    yzx = GoCustomerRegistration.objects.filter(type__icontains='worker')
+    xyz = GoCustomerRegistration.objects.filter(
+        pk=customer_status_id,
+        type__icontains='student'
+    )
+    xzy = GoCustomerRegistration.objects.filter(
+        pk=customer_status_id,
+        type__icontains='tourist'
+    )
+    yzx = GoCustomerRegistration.objects.filter(
+        pk=customer_status_id,
+        type__icontains='worker'
+    )
     customer = GoCustomerRegistration.objects.get(pk=customer_status_id)
     if customer_status_id:
         instance = get_object_or_404(GoCustomerStatus, pk=customer_status_id)
