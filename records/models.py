@@ -51,9 +51,13 @@ class GoUser(AbstractBaseUser):
     phone = models.CharField(verbose_name="Phone Number", max_length=20, null=False)
     date_joined = models.DateTimeField(verbose_name='Created On', auto_now_add=True)
     profile = models.ImageField(verbose_name='Picture', upload_to=f'profiles/%Y/',
-                                default='profile1.png',
+                                default='profile2.png',
                                 null=False)
-    last_login = models.DateTimeField(verbose_name='Last login', auto_now=True, null=False)
+    last_login = models.DateTimeField(
+        verbose_name='Last login',
+        auto_now=True,
+        null=False
+    )
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=True)
@@ -84,7 +88,11 @@ class GoCustomerRegistration(models.Model):
     email = models.EmailField(null=False)
     type = models.CharField(max_length=20, verbose_name='Customer Type')
     destination = models.CharField(max_length=30, null=False, verbose_name='Destination')
-    time_of_submission = models.DateTimeField(auto_now_add=True, null=False, verbose_name=' Submit Time')
+    time_of_submission = models.DateTimeField(
+        auto_now_add=True,
+        null=False,
+        verbose_name='Submit Time'
+    )
     phone_number = models.IntegerField(verbose_name='Phone number')
     age = models.IntegerField(verbose_name="Age", null=False)
     photo = models.ImageField(max_length=10000, verbose_name='Customer Picture',
