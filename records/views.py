@@ -190,25 +190,28 @@ def email(request):
     for a in add:
         arr.append(a.email)
     print(arr)
-    if request.POST:
-        subject = request.POST['title']
-        email_1 = request.POST['message']
-        recipient_list = arr
-        from_email = settings.EMAIL_HOST_USER
-        plain_message = strip_tags(email_1)
-        hey = EmailMultiAlternatives(
-            subject, plain_message,
-            from_email, recipient_list,
-        )
-        hey.attach_alternative(email_1, 'text/html')
-        hey.send()
-        h = hey.send()
-        messages = 'Emails sent successfully'
-        context = {
-            'messages': messages,
-            'h': h,
-        }
-        return render(request, 'email.html', context)
+    if GoCustomerRegistration.objects.all().count() == 0:
+        return redirect('dashboard')
+    else:
+        if request.POST:
+            subject = request.POST['title']
+            email_1 = request.POST['message']
+            recipient_list = arr
+            from_email = settings.EMAIL_HOST_USER
+            plain_message = strip_tags(email_1)
+            hey = EmailMultiAlternatives(
+                subject, plain_message,
+                from_email, recipient_list,
+            )
+            hey.attach_alternative(email_1, 'text/html')
+            hey.send()
+            h = hey.send()
+            messages = 'Emails sent successfully'
+            context = {
+                'messages': messages,
+                'h': h,
+            }
+            return render(request, 'email.html', context)
     return render(request, 'email.html', context1)
 
 
@@ -224,26 +227,29 @@ def email_user(request):
         'add': add,
     }
     global messages
-    if request.POST:
-        subject = request.POST['title']
-        email_1 = request.POST['message']
-        email = request.POST['email']
-        recipient_list = [email]
-        from_email = settings.EMAIL_HOST_USER
-        plain_message = strip_tags(email_1)
-        hey = EmailMultiAlternatives(
-            subject, plain_message,
-            from_email, recipient_list,
-        )
-        hey.attach_alternative(email_1, 'text/html')
-        hey.send()
-        h = hey.send()
-        messages = 'Emails sent successfully'
-        context = {
-            'messages': messages,
-            'h': h,
-        }
-        return render(request, 'email_user.html', context)
+    if GoCustomerRegistration.objects.all().count() == 0:
+        return redirect('dashboard')
+    else:
+        if request.POST:
+            subject = request.POST['title']
+            email_1 = request.POST['message']
+            email = request.POST['email']
+            recipient_list = [email]
+            from_email = settings.EMAIL_HOST_USER
+            plain_message = strip_tags(email_1)
+            hey = EmailMultiAlternatives(
+                subject, plain_message,
+                from_email, recipient_list,
+            )
+            hey.attach_alternative(email_1, 'text/html')
+            hey.send()
+            h = hey.send()
+            messages = 'Emails sent successfully'
+            context = {
+                'messages': messages,
+                'h': h,
+            }
+            return render(request, 'email_user.html', context)
     return render(request, 'email_user.html', contexter)
 
 
