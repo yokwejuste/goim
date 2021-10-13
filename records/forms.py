@@ -74,7 +74,6 @@ class UserLoginForm(forms.ModelForm):
 
 
 class GoCustomerRegistrationForm(forms.ModelForm):
-
     class Meta:
         model = GoCustomerRegistration
         fields = '__all__'
@@ -158,5 +157,10 @@ class GoCustomerStatusForm(forms.ModelForm):
                 choices=VALUE_CHOICES,
                 attrs={'class': 'form-control form-control-user',
                        'placeholder': 'Which type of Customer is he/she'},
+            ),
+            'documents': forms.FileInput(
+                attrs={'multiple': False, 'class': ' mb-lg-2 btn btn-primary  m-lg-2'
+                                                   ' d-block btn-user w-100',
+                       'placeholder': 'Drop his files at once here'},
             ),
         }

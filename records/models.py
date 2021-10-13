@@ -45,14 +45,35 @@ class GoUserManager(BaseUserManager):
 
 
 class GoUser(AbstractBaseUser):
-    username = models.CharField(verbose_name='Username', max_length=60, unique=True)
-    email = models.EmailField(verbose_name='Email Address', max_length=60, unique=True)
-    name = models.CharField(verbose_name='Full Name', max_length=200, unique=True)
-    phone = models.CharField(verbose_name="Phone Number", max_length=20, null=False)
-    date_joined = models.DateTimeField(verbose_name='Created On', auto_now_add=True)
-    profile = models.ImageField(verbose_name='Picture', upload_to=f'profiles/%Y/',
-                                default='profile2.png',
-                                null=False)
+    username = models.CharField(
+        verbose_name='Username',
+        max_length=60,
+        unique=True
+    )
+    email = models.EmailField(
+        verbose_name='Email Address',
+        max_length=60,
+        unique=True
+    )
+    name = models.CharField(
+        verbose_name='Full Name',
+        max_length=200,
+        unique=True
+    )
+    phone = models.CharField(
+        verbose_name="Phone Number",
+        max_length=20, null=False
+    )
+    date_joined = models.DateTimeField(
+        verbose_name='Created On',
+        auto_now_add=True
+    )
+    profile = models.ImageField(
+        verbose_name='Picture',
+        upload_to=f'profiles/%Y/',
+        default='profile2.png',
+        null=False
+    )
     last_login = models.DateTimeField(
         verbose_name='Last login',
         auto_now=True,
@@ -84,10 +105,20 @@ class GoUser(AbstractBaseUser):
 
 
 class GoCustomerRegistration(models.Model):
-    name = models.CharField(max_length=300, verbose_name='Full name')
+    name = models.CharField(
+        max_length=300,
+        verbose_name='Full name'
+    )
     email = models.EmailField(null=False)
-    type = models.CharField(max_length=20, verbose_name='Customer Type')
-    destination = models.CharField(max_length=30, null=False, verbose_name='Destination')
+    type = models.CharField(
+        max_length=20,
+        verbose_name='Customer Type'
+    )
+    destination = models.CharField(
+        max_length=30,
+        null=False,
+        verbose_name='Destination'
+    )
     time_of_submission = models.DateTimeField(
         auto_now_add=True,
         null=False,
@@ -95,9 +126,14 @@ class GoCustomerRegistration(models.Model):
     )
     phone_number = models.IntegerField(verbose_name='Phone number')
     age = models.IntegerField(verbose_name="Age", null=False)
-    photo = models.ImageField(max_length=10000, verbose_name='Customer Picture',
-                              null=False, upload_to='customers/profiles/')
-    documents = models.FileField(upload_to='%Y/customers/documents/')
+    photo = models.ImageField(
+        max_length=10000,
+        verbose_name='Customer Picture',
+        null=False,
+        upload_to=f'%Y/customers/AllFiles/%u/profiles/')
+    documents = models.FileField(
+        upload_to=f'%Y/customers/AllFiles/%u/documents/'
+    )
 
     class Meta:
         ordering = ["time_of_submission"]
@@ -114,7 +150,15 @@ class GoCustomerStatus(models.Model):
                                 on_delete=models.CASCADE, primary_key=True,
                                 null=False,
                                 )
-    value = models.IntegerField(verbose_name='Level', null=False, primary_key=False)
+    value = models.IntegerField(
+        verbose_name='Level',
+        null=False,
+        primary_key=False
+    )
+    documents = models.FileField(
+        verbose_name='Customers files',
+        upload_to=f'%Y/customers/AllFiles/%u/documents/'
+    )
 
     class Meta:
         verbose_name_plural = 'Customers Status'
