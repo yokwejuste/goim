@@ -369,7 +369,7 @@ def customer_status(request, customer_status_id=None):
     else:
         instance = GoCustomerStatus()
 
-    form = GoCustomerStatusForm(request.POST or None, instance=instance)
+    form = GoCustomerStatusForm(request.POST or None, request.FILES, instance=instance)
     if request.POST and request.FILES and form.is_valid():
         name_k = GoCustomerRegistration.objects.get(pk=customer_status_id)
         nose = GoCustomerStatus.objects.get(pk=customer_status_id)
