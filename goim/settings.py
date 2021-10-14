@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'user_visit',
     'records',
     'captcha',
-    # 'gdstorage',
     'storages',
     'django_agenda',
     'django_heroku',
@@ -197,8 +196,6 @@ RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
 
 # Amazon config
 AWS_LOCATION = 'static'
-AWS_ACCESS_KEY_ID = 'AKIA2OXRCB4FS53CNV4I'
-AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'go-immigration-records'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.us-east-2.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
