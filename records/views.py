@@ -321,7 +321,7 @@ def customer_status_change(request, customer_status_id=None):
 
     form = GoCustomerStatusForm(request.POST or None, request.FILES or None,
                                 instance=instance)
-    if request.POST and request.FILES and form.is_valid():
+    if request.POST and form.is_valid():
         its = request.POST['name']
         name_k = GoCustomerRegistration.objects.get(pk=its)
         email_d = GoCustomerRegistration.objects.get(pk=its)
@@ -371,7 +371,7 @@ def customer_status(request, customer_status_id=None):
         instance = GoCustomerStatus()
 
     form = GoCustomerStatusForm(request.POST or None, request.FILES, instance=instance)
-    if request.POST and request.FILES and form.is_valid():
+    if request.POST and form.is_valid():
         name_k = GoCustomerRegistration.objects.get(pk=customer_status_id)
         nose = GoCustomerStatus.objects.get(pk=customer_status_id)
         email_d = GoCustomerRegistration.objects.get(pk=customer_status_id)
