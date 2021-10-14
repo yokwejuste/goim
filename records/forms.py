@@ -132,11 +132,6 @@ class UserProfile(forms.ModelForm):
 
 
 class GoCustomerStatusForm(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super(GoCustomerStatusForm, self).__init__(*args, **kwargs)
-        self.fields['documents'].required = False
-
     class Meta:
         model = GoCustomerStatus
         fields = '__all__'
@@ -148,7 +143,6 @@ class GoCustomerStatusForm(forms.ModelForm):
             (40, '40%'),
             (50, '50%'),
             (60, '60%'),
-
             (70, '70%'),
             (80, '80%'),
             (90, '90%'),
@@ -165,7 +159,7 @@ class GoCustomerStatusForm(forms.ModelForm):
                        'placeholder': 'Which type of Customer is he/she'},
             ),
             'documents': forms.FileInput(
-                attrs={'multiple': False, 'blank': True,
+                attrs={'multiple': False,
                        'required': False,
                        'class': ' mb-lg-2 btn btn-success  m-lg-2'
                                 ' d-block btn-user w-100',
