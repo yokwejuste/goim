@@ -130,9 +130,9 @@ class GoCustomerRegistration(models.Model):
         max_length=10000,
         verbose_name='Customer Picture',
         null=False,
-        upload_to=f'%Y/customers/AllFiles/%u/profiles/')
+        upload_to=f'%Y/customers/all_files/%u/profiles/')
     documents = models.FileField(
-        upload_to=f'%Y/customers/AllFiles/%u/documents/'
+        upload_to=f'%Y/customers/all_files/%u/documents/'
     )
 
     class Meta:
@@ -158,7 +158,7 @@ class GoCustomerStatus(models.Model):
     documents = models.FileField(
         verbose_name='Customers files',
         null=True,
-        upload_to=f'%Y/customers/AllFiles/%u/documents/'
+        upload_to=f'%Y/customers/all_files/%u/documents/'
     )
 
     class Meta:
