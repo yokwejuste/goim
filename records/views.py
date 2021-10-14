@@ -319,7 +319,7 @@ def customer_status_change(request, customer_status_id=None):
     else:
         instance = GoCustomerStatus()
 
-    form = GoCustomerStatusForm(request.POST or None, request.FILES,
+    form = GoCustomerStatusForm(request.POST or None, request.FILES or None,
                                 instance=instance)
     if request.POST and request.FILES and form.is_valid():
         its = request.POST['name']
