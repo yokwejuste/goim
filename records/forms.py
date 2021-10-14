@@ -132,21 +132,27 @@ class UserProfile(forms.ModelForm):
 
 
 class GoCustomerStatusForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(GoCustomerStatusForm, self).__init__(*args, **kwargs)
+        self.fields['documents'].required = False
+
     class Meta:
         model = GoCustomerStatus
         fields = '__all__'
         VALUE_CHOICES = (
             ('', 'How far has the customer gone?'),
-            (10, 'Signature du Contrat'),
-            (20, 'Documents par universite'),
-            (30, 'Denamnde et Obtention d\'admission a l\'universite'),
-            (40, 'Demande et Obtention de CAQ'),
-            (50, 'Demande de PE'),
-            (60, 'Fournir les donees biometrique'),
-            (70, 'Examens Medicaux'),
-            (80, 'Demande de Passport'),
-            (90, 'Permis d\'etude'),
-            (100, 'Arrivcan'),
+            (10, '10%'),
+            (20, '20%'),
+            (30, '30%'),
+            (40, '40%'),
+            (50, '50%'),
+            (60, '60%'),
+
+            (70, '70%'),
+            (80, '80%'),
+            (90, '90%'),
+            (100, 'Felicitations 100%'),
         )
         widgets = {
             'name': forms.Select(
@@ -159,7 +165,8 @@ class GoCustomerStatusForm(forms.ModelForm):
                        'placeholder': 'Which type of Customer is he/she'},
             ),
             'documents': forms.FileInput(
-                attrs={'multiple': False, 'required': False,
+                attrs={'multiple': False, 'blank': True,
+                       'required': False,
                        'class': ' mb-lg-2 btn btn-success  m-lg-2'
                                 ' d-block btn-user w-100',
                        'placeholder': 'Drop his files at once here'},

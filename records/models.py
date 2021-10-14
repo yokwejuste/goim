@@ -107,7 +107,8 @@ class GoUser(AbstractBaseUser):
 class GoCustomerRegistration(models.Model):
     name = models.CharField(
         max_length=300,
-        verbose_name='Full name'
+        verbose_name='Full name',
+        unique=True,
     )
     email = models.EmailField(null=False)
     type = models.CharField(
@@ -157,7 +158,7 @@ class GoCustomerStatus(models.Model):
     )
     documents = models.FileField(
         verbose_name='Customers files',
-        null=True,
+        null=True, default='',
         upload_to=f'%Y/customers/all_files/%u/documents/'
     )
 
