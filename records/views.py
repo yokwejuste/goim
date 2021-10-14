@@ -319,7 +319,8 @@ def customer_status_change(request, customer_status_id=None):
     else:
         instance = GoCustomerStatus()
 
-    form = GoCustomerStatusForm(request.POST or None, instance=instance)
+    form = GoCustomerStatusForm(request.POST or None, request.FILES,
+                                instance=instance)
     if request.POST and request.FILES and form.is_valid():
         its = request.POST['name']
         name_k = GoCustomerRegistration.objects.get(pk=its)
