@@ -158,7 +158,7 @@ class GoCustomerStatus(models.Model):
     )
     documents = models.FileField(
         verbose_name='Customers files',
-        null=True, default='',
+        null=True, default='', blank=True,
         upload_to=f'%Y/customers/all_files/%u/documents/'
     )
 
